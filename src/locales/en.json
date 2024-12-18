@@ -6,7 +6,8 @@
       "underline": "Underline"
     },
     "button": {
-      "submit": "Submit"
+      "submit": "Submit",
+      "cancel": "Cancel"
     },
     "placeholder": "Write something...",
     "editor": {
