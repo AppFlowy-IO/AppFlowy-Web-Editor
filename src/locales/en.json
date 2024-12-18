@@ -5,6 +5,9 @@
       "italic": "Italic",
       "underline": "Underline"
     },
+    "button": {
+      "submit": "Submit"
+    },
     "placeholder": "Write something...",
     "editor": {
       "fontColorDefault": "Default",
