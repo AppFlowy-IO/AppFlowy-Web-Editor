@@ -27,7 +27,7 @@ export function Editor({
     void (async () => {
       if (locale) {
         const resources = locale.resources || (await import(`../locales/${locale.lang}.json`)).default;
-        addResourceBundle(locale.lang, 'translation', resources.translation);
+        addResourceBundle(locale.lang, 'editor', resources.editor);
         await changeLanguage(locale.lang);
       }
     })();

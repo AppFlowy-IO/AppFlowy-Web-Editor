@@ -7,12 +7,12 @@ export function changeLanguage(lang: string) {
   return editorI18n.changeLanguage(lang);
 }
 
-export function addResourceBundle(lang: string, ns: string, resources: Record<string, string>) {
+export function addResourceBundle(lang: string, _ns: string, resources: Record<string, string>) {
   const editorI18n = getI18n();
   if (!editorI18n) throw new Error('i18n not initialized');
-  const isExist = editorI18n.hasResourceBundle(lang, ns);
+  const isExist = editorI18n.hasResourceBundle(lang, 'editor');
   if (isExist) return;
-  editorI18n.addResourceBundle(lang, ns, resources, true, true);
+  editorI18n.addResourceBundle(lang, 'editor', resources, true, true);
 }
 
 export const useTranslation: typeof useReactI18next = (_, options) => {
