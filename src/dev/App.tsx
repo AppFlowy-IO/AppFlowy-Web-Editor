@@ -10,6 +10,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import './i18n';
+import { useTranslation } from 'react-i18next';
 
 const initialValue: EditorData = [
   {
@@ -88,6 +90,7 @@ export default function App() {
   const handleSwitchTheme = useCallback(() => {
     setTheme(theme === 'light' ? 'dark' : 'light');
   }, [theme]);
+  const { t } = useTranslation() as { t: (key: string) => string };
 
   return (
     <div
@@ -99,12 +102,12 @@ export default function App() {
             checked={theme === 'dark'}
             onCheckedChange={handleSwitchTheme}
           />
-          <Label>Theme</Label>
+          <Label>{t('themeLabel')}</Label>
         </div>
 
         <Select onValueChange={setLang}>
           <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Language"/>
+            <SelectValue placeholder={t('languageLabel')}/>
           </SelectTrigger>
           <SelectContent>
             {
@@ -124,7 +127,8 @@ export default function App() {
             modalZIndex={1000}
             locale={{
               lang,
-            }} theme={theme} initialValue={initialValue}/>
+            }} theme={theme} initialValue={initialValue}
+          />
         </EditorProvider>
       </div>
 

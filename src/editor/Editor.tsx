@@ -1,14 +1,14 @@
 import { useCallback, useContext, useEffect, useMemo } from 'react';
 import { EditorProps } from '@/types';
 import '@/styles/index.scss';
-import { initI18n } from '@/i18n/config';
+import { initI18n, EditorI18nContext } from '@/i18n/config';
 import { addResourceBundle, changeLanguage } from '@/i18n';
 import RichText from './RichText';
 import { Descendant, Operation } from 'slate';
 import { transformFromSlateData, transformToSlateData } from '@/lib/transform';
 import { EditorContext } from '@/editor/context';
 
-initI18n();
+const editorI18n = initI18n();
 
 export function Editor({
   locale,
@@ -58,10 +58,12 @@ export function Editor({
   }, [initialValueProp]);
 
   return (
-    <div
-      className="appflowy-editor flex flex-col selection:bg-selection w-full text-foreground overflow-hidden">
-      <RichText editor={context.editor} onChange={handleChange} initialValue={value} readOnly={readOnly}/>
-    </div>
+    <EditorI18nContext.Provider value={editorI18n}>
+      <div
+        className="appflowy-editor flex flex-col selection:bg-selection w-full text-foreground overflow-hidden">
+        <RichText editor={context.editor} onChange={handleChange} initialValue={value} readOnly={readOnly}/>
+      </div>
+    </EditorI18nContext.Provider>
   );
 }
 
