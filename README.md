@@ -32,8 +32,11 @@ Note: This package requires these peer dependencies to be installed:
 
 ```
 "peerDependencies": {
+    "i18next": "^22.4.10",
+    "i18next-resources-to-backend": "^1.2.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-i18next": "^14.1.0"
 }
 ```
 
@@ -116,16 +119,19 @@ the `Editor` component.
 import { Editor, EditorProvider } from '@appflowyinc/editor';
 // Optionally, you can import the language resources from the package
 import zh from '@appflowyinc/editor/locales/zh-CN.json';
+import hostI18n from 'i18next';
 
 const App = () => {
-  return <EditorProvider>
-    <Editor locale={{
-      // The language code.
-      lang: 'zh-CN',
-      // Optionally, you can pass the language resources or let it use the default resources
-      resources: zh,
-    }}/>
-  </EditorProvider>;
+  return <I18nextProvider i18n={hostI18n}>
+    <EditorProvider>
+      <Editor locale={{
+        // The language code.
+        lang: 'zh-CN',
+        // Optionally, you can pass the language resources or let it use the default resources
+        resources: zh,
+      }}/>
+    </EditorProvider>
+  </I18nextProvider>;
 };
 
 export default App;
