@@ -1,43 +1,17 @@
 {
-  "translation": {
-    "toolbar": {
-      "bold": "Bold",
-      "italic": "Italic",
-      "underline": "Underline"
-    },
-    "button": {
-      "submit": "Submit",
-      "delete": "לִמְחוֹק"
-    },
-    "placeholder": "Write something...",
-    "editor": {
-      "fontColorDefault": "Default",
-      "fontColorRed": "Red",
-      "fontColorGreen": "Green",
-      "fontColorBlue": "Blue",
-      "fontColorYellow": "Yellow",
-      "fontColorOrange": "Orange",
-      "fontColorPurple": "Purple",
-      "fontColorPink": "Pink",
-      "fontColorBrown": "Brown",
-      "fontColorGray": "Gray",
-      "backgroundColorDefault": "Default",
-      "backgroundColorRed": "Red",
-      "backgroundColorGreen": "Green",
-      "backgroundColorBlue": "Blue",
-      "backgroundColorYellow": "Yellow",
-      "backgroundColorOrange": "Orange",
-      "backgroundColorPurple": "Purple",
-      "backgroundColorPink": "Pink",
-      "backgroundColorBrown": "Brown",
-      "backgroundColorGray": "Gray",
-      "backgroundColorLime": "Lime",
-      "backgroundColorAqua": "Aqua",
-      "backgroundColor": "Background Color",
-      "textColor": "Text Color",
-      "heading": "Heading {{level}}",
-      "paragraph": "Paragraph",
-      "blockquote": "Blockquote"
-    }
+  "editor": {
+    "placeholder": "תכתוב משהו...",
+    "fontColorDefault": "בְּרִירַת מֶחדָל",
+    "fontColorRed": "אָדוֹם",
+    "fontColorGreen": "יָרוֹק",
+    "fontColorBlue": "כְּחוֹל",
+    "fontColorYellow": "צָהוֹב",
+    "fontColorOrange": "כָּתוֹם",
+    "fontColorPurple": "סָגוֹל",
+    "fontColorPink": "וָרוֹד",
+    "fontColorBrown": "חוּם",
+    "fontColorGray": "אָפוֹר",
+    "backgroundColorDefault": "בְּרִירַת מֶחדָל",
+    "backgroundColorRed": "אָדוֹם"
   }
 }

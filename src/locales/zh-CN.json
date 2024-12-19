@@ -1,37 +1,17 @@
 {
-  "translation": {
-    "button": {
-      "delete": "删除"
-    },
-    "placeholder": "请输入...",
-    "editor": {
-      "fontColorDefault": "默认",
-      "fontColorRed": "红色",
-      "fontColorGreen": "绿色",
-      "fontColorBlue": "蓝色",
-      "fontColorYellow": "黄色",
-      "fontColorOrange": "橙色",
-      "fontColorPurple": "紫色",
-      "fontColorPink": "粉色",
-      "fontColorBrown": "棕色",
-      "fontColorGray": "灰色",
-      "backgroundColorDefault": "默认",
-      "backgroundColorRed": "红色",
-      "backgroundColorGreen": "绿色",
-      "backgroundColorBlue": "蓝色",
-      "backgroundColorYellow": "黄色",
-      "backgroundColorOrange": "橙色",
-      "backgroundColorPurple": "紫色",
-      "backgroundColorPink": "粉色",
-      "backgroundColorBrown": "棕色",
-      "backgroundColorGray": "灰色",
-      "backgroundColorLime": "石灰色",
-      "backgroundColorAqua": "水蓝色",
-      "backgroundColor": "背景颜色",
-      "textColor": "文字颜色",
-      "heading": "标题 {{level}}",
-      "paragraph": "段落",
-      "blockquote": "引用"
-    }
+  "editor": {
+    "placeholder": "写点东西...",
+    "fontColorDefault": "默认",
+    "fontColorRed": "红色的",
+    "fontColorGreen": "绿色的",
+    "fontColorBlue": "蓝色的",
+    "fontColorYellow": "黄色的",
+    "fontColorOrange": "橙子",
+    "fontColorPurple": "紫色的",
+    "fontColorPink": "粉色的",
+    "fontColorBrown": "棕色的",
+    "fontColorGray": "灰色的",
+    "backgroundColorDefault": "默认",
+    "backgroundColorRed": "红色的"
   }
 }

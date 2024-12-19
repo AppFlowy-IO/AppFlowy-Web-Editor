@@ -1,43 +1,17 @@
 {
-  "translation": {
-    "toolbar": {
-      "bold": "Bold",
-      "italic": "Italic",
-      "underline": "Underline"
-    },
-    "button": {
-      "submit": "Submit",
-      "delete": "يمسح"
-    },
-    "placeholder": "Write something...",
-    "editor": {
-      "fontColorDefault": "Default",
-      "fontColorRed": "Red",
-      "fontColorGreen": "Green",
-      "fontColorBlue": "Blue",
-      "fontColorYellow": "Yellow",
-      "fontColorOrange": "Orange",
-      "fontColorPurple": "Purple",
-      "fontColorPink": "Pink",
-      "fontColorBrown": "Brown",
-      "fontColorGray": "Gray",
-      "backgroundColorDefault": "Default",
-      "backgroundColorRed": "Red",
-      "backgroundColorGreen": "Green",
-      "backgroundColorBlue": "Blue",
-      "backgroundColorYellow": "Yellow",
-      "backgroundColorOrange": "Orange",
-      "backgroundColorPurple": "Purple",
-      "backgroundColorPink": "Pink",
-      "backgroundColorBrown": "Brown",
-      "backgroundColorGray": "Gray",
-      "backgroundColorLime": "Lime",
-      "backgroundColorAqua": "Aqua",
-      "backgroundColor": "Background Color",
-      "textColor": "Text Color",
-      "heading": "Heading {{level}}",
-      "paragraph": "Paragraph",
-      "blockquote": "Blockquote"
-    }
+  "editor": {
+    "placeholder": "اكتب شيئا...",
+    "fontColorDefault": "تقصير",
+    "fontColorRed": "أحمر",
+    "fontColorGreen": "أخضر",
+    "fontColorBlue": "أزرق",
+    "fontColorYellow": "أصفر",
+    "fontColorOrange": "البرتقالي",
+    "fontColorPurple": "أرجواني",
+    "fontColorPink": "لون القرنفل",
+    "fontColorBrown": "بني",
+    "fontColorGray": "رمادي",
+    "backgroundColorDefault": "تقصير",
+    "backgroundColorRed": "أحمر"
   }
 }

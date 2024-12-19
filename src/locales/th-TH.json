@@ -1,43 +1,17 @@
 {
-  "translation": {
-    "toolbar": {
-      "bold": "Bold",
-      "italic": "Italic",
-      "underline": "Underline"
-    },
-    "button": {
-      "submit": "Submit",
-      "delete": "ลบ"
-    },
-    "placeholder": "Write something...",
-    "editor": {
-      "fontColorDefault": "Default",
-      "fontColorRed": "Red",
-      "fontColorGreen": "Green",
-      "fontColorBlue": "Blue",
-      "fontColorYellow": "Yellow",
-      "fontColorOrange": "Orange",
-      "fontColorPurple": "Purple",
-      "fontColorPink": "Pink",
-      "fontColorBrown": "Brown",
-      "fontColorGray": "Gray",
-      "backgroundColorDefault": "Default",
-      "backgroundColorRed": "Red",
-      "backgroundColorGreen": "Green",
-      "backgroundColorBlue": "Blue",
-      "backgroundColorYellow": "Yellow",
-      "backgroundColorOrange": "Orange",
-      "backgroundColorPurple": "Purple",
-      "backgroundColorPink": "Pink",
-      "backgroundColorBrown": "Brown",
-      "backgroundColorGray": "Gray",
-      "backgroundColorLime": "Lime",
-      "backgroundColorAqua": "Aqua",
-      "backgroundColor": "Background Color",
-      "textColor": "Text Color",
-      "heading": "Heading {{level}}",
-      "paragraph": "Paragraph",
-      "blockquote": "Blockquote"
-    }
+  "editor": {
+    "placeholder": "เขียนอะไรบางอย่าง...",
+    "fontColorDefault": "ค่าเริ่มต้น",
+    "fontColorRed": "สีแดง",
+    "fontColorGreen": "สีเขียว",
+    "fontColorBlue": "สีฟ้า",
+    "fontColorYellow": "สีเหลือง",
+    "fontColorOrange": "ส้ม",
+    "fontColorPurple": "สีม่วง",
+    "fontColorPink": "สีชมพู",
+    "fontColorBrown": "สีน้ำตาล",
+    "fontColorGray": "สีเทา",
+    "backgroundColorDefault": "ค่าเริ่มต้น",
+    "backgroundColorRed": "สีแดง"
   }
 }

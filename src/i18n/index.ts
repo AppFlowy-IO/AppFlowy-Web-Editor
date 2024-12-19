@@ -15,8 +15,8 @@ export function addResourceBundle(lang: string, ns: string, resources: Record<st
   editorI18n.addResourceBundle(lang, ns, resources, true, true);
 }
 
-export const useTranslation: typeof useReactI18next = (ns, options) => {
+export const useTranslation: typeof useReactI18next = (_, options) => {
   const editorI18n = getI18n();
   if (!editorI18n) throw new Error('i18n not initialized');
-  return useReactI18next(ns, { ...options, i18n: editorI18n });
+  return useReactI18next('editor', { ...options, i18n: editorI18n });
 };

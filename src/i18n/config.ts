@@ -14,10 +14,10 @@ export function initI18n() {
     }))
     .use(initReactI18next)
     .init({
-      resources: { en: { translation: en.translation } },
+      resources: { en: { editor: en.editor } },
       lng: 'en',
       fallbackLng: 'en',
-      defaultNS: 'translation',
+      defaultNS: 'editor',
       interpolation: {
         escapeValue: false,
       },

@@ -82,25 +82,25 @@ function Aa() {
       >
         <div className={'flex flex-col gap-2'}>
           <Button {...getHeadingButtonProps(1)} startIcon={<H1 className={'!w-5 !h-5'}/>}>
-            {t('editor.heading', {
+            {t('heading', {
               level: 1,
             })}
           </Button>
           <Button startIcon={<H2 className={'!w-5 !h-5'}/>} {...getHeadingButtonProps(2)}>
-            {t('editor.heading', {
+            {t('heading', {
               level: 2,
             })}
           </Button>
           <Button startIcon={<H3 className={'!w-5 !h-5'}/>} {...getHeadingButtonProps(3)}>
-            {t('editor.heading', {
+            {t('heading', {
               level: 3,
             })}
           </Button>
           <Button startIcon={<Paragraph className={'!w-5 !h-5'}/>} {...getButtonProps(NodeType.Paragraph)}>
-            {t('editor.paragraph')}
+            {t('paragraph')}
           </Button>
           <Button startIcon={<Quote className={'w-5 h-5'}/>} {...getButtonProps(NodeType.Quote)}>
-            {t('editor.blockquote')}
+            {t('blockquote')}
           </Button>
         </div>
 

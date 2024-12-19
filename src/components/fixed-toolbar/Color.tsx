@@ -31,68 +31,68 @@ function Color() {
 
   const editorTextColors = useMemo(() => {
     return [{
-      label: t('editor.fontColorDefault'),
+      label: t('fontColorDefault'),
       color: '',
     }, {
-      label: t('editor.fontColorGray'),
+      label: t('fontColorGray'),
       color: 'rgb(120, 119, 116)',
     }, {
-      label: t('editor.fontColorBrown'),
+      label: t('fontColorBrown'),
       color: 'rgb(159, 107, 83)',
     }, {
-      label: t('editor.fontColorOrange'),
+      label: t('fontColorOrange'),
       color: 'rgb(217, 115, 13)',
     }, {
-      label: t('editor.fontColorYellow'),
+      label: t('fontColorYellow'),
       color: 'rgb(203, 145, 47)',
     }, {
-      label: t('editor.fontColorGreen'),
+      label: t('fontColorGreen'),
       color: 'rgb(68, 131, 97)',
     }, {
-      label: t('editor.fontColorBlue'),
+      label: t('fontColorBlue'),
       color: 'rgb(51, 126, 169)',
     }, {
-      label: t('editor.fontColorPurple'),
+      label: t('fontColorPurple'),
       color: 'rgb(144, 101, 176)',
     }, {
-      label: t('editor.fontColorPink'),
+      label: t('fontColorPink'),
       color: 'rgb(193, 76, 138)',
     }, {
-      label: t('editor.fontColorRed'),
+      label: t('fontColorRed'),
       color: 'rgb(212, 76, 71)',
     }];
   }, [t]);
 
   const editorBgColors = useMemo(() => {
     return [{
-      label: t('editor.backgroundColorDefault'),
+      label: t('backgroundColorDefault'),
       color: '',
     }, {
-      label: t('editor.backgroundColorLime'),
+      label: t('backgroundColorLime'),
       color: ColorEnum.Lime,
     }, {
-      label: t('editor.backgroundColorAqua'),
+      label: t('backgroundColorAqua'),
       color: ColorEnum.Aqua,
     }, {
-      label: t('editor.backgroundColorOrange'),
+      label: t('backgroundColorOrange'),
       color: ColorEnum.Orange,
     }, {
-      label: t('editor.backgroundColorYellow'),
+      label: t('backgroundColorYellow'),
       color: ColorEnum.Yellow,
     }, {
-      label: t('editor.backgroundColorGreen'),
+      label: t('backgroundColorGreen'),
       color: ColorEnum.Green,
     }, {
-      label: t('editor.backgroundColorBlue'),
+      label: t('backgroundColorBlue'),
       color: ColorEnum.Blue,
     }, {
-      label: t('editor.backgroundColorPurple'),
+      label: t('backgroundColorPurple'),
       color: ColorEnum.Purple,
     }, {
-      label: t('editor.backgroundColorPink'),
+      label: t('backgroundColorPink'),
       color: ColorEnum.Pink,
     }, {
-      label: t('editor.backgroundColorRed'),
+      label: t('backgroundColorRed'),
       color: ColorEnum.LightPink,
     }];
   }, [t]);
@@ -109,7 +109,7 @@ function Color() {
   const popoverContent = useMemo(() => {
     return <div className={'p-3 flex flex-col gap-3 w-[200px]'}>
       <div className={'flex flex-col gap-2'}>
-        <div className={'text-muted-foreground text-xs'}>{t('editor.textColor')}</div>
+        <div className={'text-muted-foreground text-xs'}>{t('textColor')}</div>
         <div className={'flex flex-wrap gap-1.5'}>
           {editorTextColors.map((color, index) => {
             return <Tooltip
@@ -133,7 +133,7 @@ function Color() {
         </div>
       </div>
       <div className={'flex flex-col gap-2'}>
-        <div className={'text-muted-foreground text-xs'}>{t('editor.backgroundColor')}</div>
+        <div className={'text-muted-foreground text-xs'}>{t('backgroundColor')}</div>
 
         <div className={'flex flex-wrap gap-1.5'}>
           {editorBgColors.map((color, index) => {

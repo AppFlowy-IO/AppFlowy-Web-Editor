@@ -1,43 +1,17 @@
 {
-  "translation": {
-    "toolbar": {
-      "bold": "Bold",
-      "italic": "Italic",
-      "underline": "Underline"
-    },
-    "button": {
-      "submit": "Submit",
-      "delete": "消去"
-    },
-    "placeholder": "Write something...",
-    "editor": {
-      "fontColorDefault": "Default",
-      "fontColorRed": "Red",
-      "fontColorGreen": "Green",
-      "fontColorBlue": "Blue",
-      "fontColorYellow": "Yellow",
-      "fontColorOrange": "Orange",
-      "fontColorPurple": "Purple",
-      "fontColorPink": "Pink",
-      "fontColorBrown": "Brown",
-      "fontColorGray": "Gray",
-      "backgroundColorDefault": "Default",
-      "backgroundColorRed": "Red",
-      "backgroundColorGreen": "Green",
-      "backgroundColorBlue": "Blue",
-      "backgroundColorYellow": "Yellow",
-      "backgroundColorOrange": "Orange",
-      "backgroundColorPurple": "Purple",
-      "backgroundColorPink": "Pink",
-      "backgroundColorBrown": "Brown",
-      "backgroundColorGray": "Gray",
-      "backgroundColorLime": "Lime",
-      "backgroundColorAqua": "Aqua",
-      "backgroundColor": "Background Color",
-      "textColor": "Text Color",
-      "heading": "Heading {{level}}",
-      "paragraph": "Paragraph",
-      "blockquote": "Blockquote"
-    }
+  "editor": {
+    "placeholder": "何か書いてください...",
+    "fontColorDefault": "デフォルト",
+    "fontColorRed": "赤",
+    "fontColorGreen": "緑",
+    "fontColorBlue": "青",
+    "fontColorYellow": "黄色",
+    "fontColorOrange": "オレンジ",
+    "fontColorPurple": "紫",
+    "fontColorPink": "ピンク",
+    "fontColorBrown": "茶色",
+    "fontColorGray": "グレー",
+    "backgroundColorDefault": "デフォルト",
+    "backgroundColorRed": "赤"
   }
 }

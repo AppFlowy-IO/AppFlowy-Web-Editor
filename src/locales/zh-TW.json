@@ -1,43 +1,17 @@
 {
-  "translation": {
-    "toolbar": {
-      "bold": "粗體",
-      "italic": "斜體",
-      "underline": "底線"
-    },
-    "button": {
-      "submit": "提交",
-      "delete": "刪除"
-    },
-    "placeholder": "輸入一些內容...",
-    "editor": {
-      "fontColorDefault": "默認",
-      "fontColorRed": "紅色",
-      "fontColorGreen": "綠色",
-      "fontColorBlue": "藍色",
-      "fontColorYellow": "黃色",
-      "fontColorOrange": "橙色",
-      "fontColorPurple": "紫色",
-      "fontColorPink": "粉紅色",
-      "fontColorBrown": "棕色",
-      "fontColorGray": "灰色",
-      "backgroundColorDefault": "默認",
-      "backgroundColorRed": "紅色",
-      "backgroundColorGreen": "綠色",
-      "backgroundColorBlue": "藍色",
-      "backgroundColorYellow": "黃色",
-      "backgroundColorOrange": "橙色",
-      "backgroundColorPurple": "紫色",
-      "backgroundColorPink": "粉紅色",
-      "backgroundColorBrown": "棕色",
-      "backgroundColorGray": "灰色",
-      "backgroundColorLime": "綠黃色",
-      "backgroundColorAqua": "水藍色",
-      "backgroundColor": "背景顏色",
-      "textColor": "文字顏色",
-      "heading": "標題 {{level}}",
-      "paragraph": "段落",
-      "blockquote": "引用"
-    }
+  "editor": {
+    "placeholder": "寫點東西...",
+    "fontColorDefault": "預設",
+    "fontColorRed": "紅色的",
+    "fontColorGreen": "綠色的",
+    "fontColorBlue": "藍色的",
+    "fontColorYellow": "黃色的",
+    "fontColorOrange": "橘子",
+    "fontColorPurple": "紫色的",
+    "fontColorPink": "粉紅色的",
+    "fontColorBrown": "棕色的",
+    "fontColorGray": "灰色的",
+    "backgroundColorDefault": "預設",
+    "backgroundColorRed": "紅色的"
   }
 }

@@ -1,43 +1,17 @@
 {
-  "translation": {
-    "toolbar": {
-      "bold": "Bold",
-      "italic": "Italic",
-      "underline": "Underline"
-    },
-    "button": {
-      "submit": "Submit",
-      "delete": "Silmek"
-    },
-    "placeholder": "Write something...",
-    "editor": {
-      "fontColorDefault": "Default",
-      "fontColorRed": "Red",
-      "fontColorGreen": "Green",
-      "fontColorBlue": "Blue",
-      "fontColorYellow": "Yellow",
-      "fontColorOrange": "Orange",
-      "fontColorPurple": "Purple",
-      "fontColorPink": "Pink",
-      "fontColorBrown": "Brown",
-      "fontColorGray": "Gray",
-      "backgroundColorDefault": "Default",
-      "backgroundColorRed": "Red",
-      "backgroundColorGreen": "Green",
-      "backgroundColorBlue": "Blue",
-      "backgroundColorYellow": "Yellow",
-      "backgroundColorOrange": "Orange",
-      "backgroundColorPurple": "Purple",
-      "backgroundColorPink": "Pink",
-      "backgroundColorBrown": "Brown",
-      "backgroundColorGray": "Gray",
-      "backgroundColorLime": "Lime",
-      "backgroundColorAqua": "Aqua",
-      "backgroundColor": "Background Color",
-      "textColor": "Text Color",
-      "heading": "Heading {{level}}",
-      "paragraph": "Paragraph",
-      "blockquote": "Blockquote"
-    }
+  "editor": {
+    "placeholder": "Bir şeyler yaz...",
+    "fontColorDefault": "Varsayılan",
+    "fontColorRed": "Kırmızı",
+    "fontColorGreen": "Yeşil",
+    "fontColorBlue": "Mavi",
+    "fontColorYellow": "Sarı",
+    "fontColorOrange": "Turuncu",
+    "fontColorPurple": "Mor",
+    "fontColorPink": "Pembe",
+    "fontColorBrown": "Kahverengi",
+    "fontColorGray": "Gri",
+    "backgroundColorDefault": "Varsayılan",
+    "backgroundColorRed": "Kırmızı"
   }
 }
