@@ -84,6 +84,7 @@ const languages = [
   'zh-CN',
   'zh-TW',
 ];
+
 export default function App() {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const [lang, setLang] = useState<string>('en');
@@ -127,7 +128,9 @@ export default function App() {
             modalZIndex={1000}
             locale={{
               lang,
-            }} theme={theme} initialValue={initialValue}
+            }}
+            theme={theme}
+            initialValue={initialValue}
           />
         </EditorProvider>
       </div>

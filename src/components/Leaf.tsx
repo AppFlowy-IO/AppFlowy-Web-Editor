@@ -3,6 +3,8 @@ import { renderColor } from '@/lib/color';
 
 function Leaf({ attributes, children, leaf }: RenderLeafProps) {
   const style: React.CSSProperties = {};
+  const classList = [leaf.prism_token, leaf.prism_token && 'token', leaf.class_name].filter(Boolean);
+
   if (leaf.bold) {
     children = <strong>{children}</strong>;
   }
@@ -30,7 +32,9 @@ function Leaf({ attributes, children, leaf }: RenderLeafProps) {
     style.color = renderColor(leaf.font_color);
   }
 
-  return <span {...attributes} style={style}>{children}</span>;
+  const className = classList.join(' ');
+
+  return <span {...attributes} className={className} style={style}>{children}</span>;
 }
 
 export default Leaf;

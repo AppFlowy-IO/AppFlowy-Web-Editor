@@ -40,13 +40,14 @@ function BulletedList({ attributes, children, element }: RenderElementProps) {
   }, [letter]);
   const readOnly = useReadOnly();
   return (
-    <div {...attributes} className={'flex items-center gap-1'} data-block-type={element.type}>
+    <div {...attributes} className={'flex gap-1'} data-block-type={element.type}>
       <span
         data-playwright-selected={false}
         contentEditable={false}
         onMouseDown={(e) => {
           e.preventDefault();
         }}
+        className={'min-w-5 h-6'}
       >
       <Icon className={'w-5 h-6'}/>
     </span>

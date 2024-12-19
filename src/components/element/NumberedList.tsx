@@ -2,7 +2,7 @@ import { ReactEditor, RenderElementProps, useReadOnly, useSlate } from 'slate-re
 import { useMemo } from 'react';
 import { NodeType } from '@/types';
 import { getListLevel, letterize, romanize } from '@/lib/list';
-import { Element, Path } from 'slate';
+import { Element, NodeEntry, Path } from 'slate';
 
 enum Letter {
   Number = 'number',
@@ -35,7 +35,13 @@ function NumberedList({ attributes, children, element }: RenderElementProps) {
     }
 
     try {
-      let prevPath = Path.previous(path);
+      const [parent, parentPath] = editor.parent(path) as NodeEntry<Element>;
+      let prevPath;
+      if (parent.type === NodeType.NestedBlock && path[path.length - 1] === 0) {
+        prevPath = Path.previous(parentPath);
+      } else {
+        prevPath = Path.previous(path);
+      }
 
       while (prevPath) {
         const prev = editor.node(prevPath);
@@ -45,6 +51,12 @@ function NumberedList({ attributes, children, element }: RenderElementProps) {
         if (prevNode.type === element.type) {
           index += 1;
           topNode = prevNode;
+        } else if (prevNode.type === NodeType.NestedBlock) {
+          const firstChild = prevNode.children[0] as Element;
+          if (firstChild.type === element.type) {
+            index += 1;
+            topNode = firstChild;
+          }
         } else {
           break;
         }
@@ -57,6 +69,7 @@ function NumberedList({ attributes, children, element }: RenderElementProps) {
       }
     } catch (e) {
       console.error(e);
+      console.log('editor', editor.children);
     }
 
     if (!topNode) {
@@ -85,10 +98,10 @@ function NumberedList({ attributes, children, element }: RenderElementProps) {
   }, [index, letter]);
   const readOnly = useReadOnly();
   return (
-    <div {...attributes} className={'flex items-center gap-1'} data-block-type={element.type}>
+    <div {...attributes} className={'flex gap-1'} data-block-type={element.type}>
       <span onMouseDown={(e) => {
         e.preventDefault();
-      }} className={'w-5 h-6 flex justify-center'} contentEditable={false} data-number={dataNumber}/>
+      }} className={'min-w-5 h-6 flex justify-center'} contentEditable={false} data-number={dataNumber}/>
       <span className={'flex-1'} suppressContentEditableWarning contentEditable={!readOnly}>
         {children}
       </span>

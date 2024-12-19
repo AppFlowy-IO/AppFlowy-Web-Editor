@@ -44,6 +44,9 @@ Note: This package requires these peer dependencies to be installed:
 
 To use the AppFlowy Web Editor, import the `Editor` and `EditorProvider` components from the package and wrap your app
 
+Note: Using the editor requires the `EditorProvider` component. Therefore, each `Editor` component needs to be wrapped
+by the corresponding `EditorProvider`
+
 ```tsx
 
 import { Editor, EditorProvider } from '@appflowyinc/editor';
@@ -119,6 +122,7 @@ the `Editor` component.
 import { Editor, EditorProvider } from '@appflowyinc/editor';
 // Optionally, you can import the language resources from the package
 import zh from '@appflowyinc/editor/locales/zh-CN.json';
+
 import hostI18n from 'i18next';
 
 const App = () => {

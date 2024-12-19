@@ -134,7 +134,7 @@
     @apply flex-1 overflow-auto;
   }
 
-  div[data-slate-node="element"] {
+  div[data-slate-node="element"]:not([data-block-type="nested-block"]) {
     @apply py-1 relative;
   }
 
@@ -142,14 +142,6 @@
     @apply leading-[2em];
   }
 
-
-  div[data-block-type='quote'] {
-    border-left: 4px solid var(--fill-default);
-  }
-
-  div[data-block-type='quote'] {
-    @apply pl-3 ml-2;
-  }
 
   div[data-slate-node="element"] > div[data-slate-node="element"] {
     padding-left: 1.5em;

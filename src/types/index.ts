@@ -4,6 +4,7 @@ import { Op } from 'quill-delta';
 
 export interface AppFlowyEditor {
   applyData: (data: EditorData) => void;
+  applyMarkdown: (markdown: string) => void;
 }
 
 export enum NodeType {
@@ -14,6 +15,10 @@ export enum NodeType {
   NumberedList = 'numbered_list',
   BulletedList = 'bulleted_list',
   Quote = 'quote',
+  Code = 'code',
+  LinkPreview = 'link_preview',
+  Image = 'image',
+  Divider = 'divider',
 }
 
 export enum InlineType {
