@@ -80,6 +80,9 @@ const App = () => {
       ],
       children: []
     });
+
+    // or apply markdown
+    editor.applyMarkdown('# Hello, World!');
   }, []);
 
   return
@@ -228,9 +231,10 @@ Returns the editor instance with methods to control the editor.
 const editor = useEditor();
 ```
 
-| Method    | Description              |
-|-----------|--------------------------|
-| applyData | Apply data to the editor |
+| Method        | Description                  |
+|---------------|------------------------------|
+| applyData     | Apply data to the editor     |
+| applyMarkdown | Apply markdown to the editor |
 
 ## 🔨 Development
 
