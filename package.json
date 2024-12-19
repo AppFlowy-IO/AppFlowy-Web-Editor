@@ -30,7 +30,6 @@
     "build": "vite build",
     "build:types": "tsc --emitDeclarationOnly",
     "dev": "vite",
-    "css:variables": "node scripts/generateTailwindColors.cjs",
     "lint": "eslint -c eslint.config.js",
     "analyze": "ANALYZE_MODE=true vite build"
   },
