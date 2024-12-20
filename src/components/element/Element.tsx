@@ -1,4 +1,4 @@
-import { RenderElementProps } from 'slate-react';
+import { RenderElementProps, useReadOnly } from 'slate-react';
 import { NodeType } from '@/types';
 import Heading from '@/components/element/Heading';
 import Checkbox from '@/components/element/Checkbox';
@@ -15,6 +15,7 @@ export function Element({
   attributes,
   children,
 }: RenderElementProps) {
+  const readOnly = useReadOnly();
 
   switch (element.type) {
     case NodeType.Heading:
@@ -28,12 +29,24 @@ export function Element({
     case NodeType.Quote:
       return <Quote {...{ attributes, children, element }} />;
     case NodeType.LinkPreview:
+      if (!readOnly) {
+        break;
+      }
       return <LinkPreview {...{ attributes, children, element }} />;
     case NodeType.Image:
+      if (!readOnly) {
+        break;
+      }
       return <Image {...{ attributes, children, element }} />;
     case NodeType.Divider:
+      if (!readOnly) {
+        break;
+      }
       return <Divider {...{ attributes, children, element }} />;
     case NodeType.Code:
+      if (!readOnly) {
+        break;
+      }
       return <Code {...{ attributes, children, element }} />;
   }
 

@@ -5,7 +5,7 @@ import { withMarkdown } from '@/plugins/withMarkdown';
 import { turnToType } from '@/lib/editor';
 
 export const withCustomEditor = (editor: ReactEditor) => {
-  const { insertBreak, deleteBackward } = editor;
+  const { insertBreak, deleteBackward, splitNodes } = editor;
 
   editor.insertData = data => {
     return editor.insertTextData(data);
@@ -52,6 +52,21 @@ export const withCustomEditor = (editor: ReactEditor) => {
     }
   };
 
+  editor.splitNodes = (options) => {
+
+    const {
+      always,
+    } = options || {};
+
+    if (always) {
+      const marks = Editor.marks(editor);
+      Object.keys(marks || {}).forEach(mark => {
+        editor.removeMark(mark);
+      });
+    }
+
+    splitNodes(options);
+  };
   editor.deleteBackward = (...args) => {
     const { selection } = editor;
 
