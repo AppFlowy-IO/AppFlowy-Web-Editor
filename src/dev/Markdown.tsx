@@ -50,18 +50,13 @@ function Main() {
   const editor = useEditor();
 
   useEffect(() => {
-    editor.applyMarkdown(markdown);
+    editor.applyMarkdown('# Loading...');
+    setTimeout(() => {
+      editor.applyMarkdown(markdown);
+    }, 1000);
   }, [editor]);
 
-  return <Editor readOnly initialValue={[{
-    type: NodeType.Paragraph,
-    delta: [{ insert: 'Loading...' }],
-    children: [],
-  }, {
-    type: NodeType.Paragraph,
-    delta: [{ insert: 'Loading...' }],
-    children: [],
-  }]}/>;
+  return <Editor readOnly/>;
 }
 
 function Markdown() {

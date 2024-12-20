@@ -2,7 +2,7 @@ import { useMemo, useContext, useCallback } from 'react';
 import { withCustomEditor } from '@/plugins';
 import { withHistory } from 'slate-history';
 import { withReact } from 'slate-react';
-import { createEditor, Descendant, Editor, Transforms } from 'slate';
+import { createEditor, Descendant, Editor } from 'slate';
 import { AppFlowyEditor, EditorData } from '@/types';
 import { transformToSlateData } from '@/lib/transform';
 import { EditorContext } from '@/editor/context';
@@ -23,10 +23,17 @@ export const EditorProvider: React.FC<{
   const editor = useMemo(() => withCustomEditor(withHistory(withReact(createEditor()))), []);
 
   const replaceContent = useCallback((newContent: Descendant[]) => {
-    editor.children = [];
-
-    Transforms.insertNodes(editor, newContent, { at: [0] });
+    if (newContent.length === 0) {
+      newContent.push({
+        type: 'paragraph',
+        children: [{ text: '' }],
+      });
+    }
     
+    editor.children = newContent;
+
+    editor.select(editor.start([0]));
+
     Editor.normalize(editor, { force: true });
   }, [editor]);
   const applyData = useCallback((data: EditorData) => {
