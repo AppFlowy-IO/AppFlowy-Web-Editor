@@ -21,8 +21,8 @@ const buttonVariants = cva(
       },
       color: {
         default: '',
-        primary: 'text-primary',
-        secondary: 'text-secondary-foreground',
+        primary: '!text-primary',
+        secondary: '!text-secondary-foreground',
       },
       size: {
         default: 'h-8 px-2 rounded-[8px]',

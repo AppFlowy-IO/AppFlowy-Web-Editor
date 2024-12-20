@@ -1,15 +1,11 @@
 import { ReactEditor } from 'slate-react';
-import { Editor, Element, Range, Point } from 'slate';
+import { Editor, Element, Range, Point, NodeEntry, Path } from 'slate';
 import { NodeType } from '@/types';
 import { withMarkdown } from '@/plugins/withMarkdown';
 import { turnToType } from '@/lib/editor';
 
 export const withCustomEditor = (editor: ReactEditor) => {
   const { insertBreak, deleteBackward, splitNodes } = editor;
-
-  editor.insertData = data => {
-    return editor.insertTextData(data);
-  };
 
   editor.insertBreak = () => {
     const { selection } = editor;
@@ -24,7 +20,7 @@ export const withCustomEditor = (editor: ReactEditor) => {
       });
 
       if (match) {
-        const [, path] = match;
+        const [node, path] = match as NodeEntry<Element>;
         const string = Editor.string(editor, path);
         if (string.length === 0) {
           const start = Editor.start(editor, path);
@@ -33,6 +29,22 @@ export const withCustomEditor = (editor: ReactEditor) => {
             turnToType(editor, NodeType.Paragraph);
             return;
           }
+        }
+        if (node.type === NodeType.Heading) {
+          insertBreak();
+          turnToType(editor, NodeType.Paragraph);
+          return;
+        } else if (node.type === NodeType.Todo && node.data?.checked) {
+          insertBreak();
+          editor.setNodes({
+            type: NodeType.Todo,
+            data: {
+              checked: false,
+            },
+          }, {
+            at: Path.next(path),
+          });
+          return;
         }
 
       }
@@ -57,6 +69,7 @@ export const withCustomEditor = (editor: ReactEditor) => {
     const {
       always,
     } = options || {};
+    splitNodes(options);
 
     if (always) {
       const marks = Editor.marks(editor);
@@ -65,7 +78,6 @@ export const withCustomEditor = (editor: ReactEditor) => {
       });
     }
 
-    splitNodes(options);
   };
   editor.deleteBackward = (...args) => {
     const { selection } = editor;

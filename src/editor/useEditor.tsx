@@ -1,4 +1,4 @@
-import { useMemo, useContext, useCallback } from 'react';
+import { useMemo, useContext, useCallback, useState } from 'react';
 import { withCustomEditor } from '@/plugins';
 import { withHistory } from 'slate-history';
 import { withReact } from 'slate-react';
@@ -21,15 +21,18 @@ export const EditorProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
   const editor = useMemo(() => withCustomEditor(withHistory(withReact(createEditor()))), []);
+  const [, setClock] = useState(0);
+
   const applyData = useCallback((data: EditorData) => {
     editor.children = transformToSlateData(data);
     Editor.normalize(editor, { force: true });
+    setClock(prev => prev + 1);
   }, [editor]);
 
   const applyMarkdown = useCallback((markdown: string) => {
     editor.children = markdownToSlateData(markdown);
-    console.log(editor.children);
     Editor.normalize(editor, { force: true });
+    setClock(prev => prev + 1);
   }, [editor]);
 
   const appflowyEditor = useMemo(() => {
