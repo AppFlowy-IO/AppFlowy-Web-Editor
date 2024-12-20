@@ -1,8 +1,8 @@
-import { useMemo, useContext, useCallback, useState } from 'react';
+import { useMemo, useContext, useCallback } from 'react';
 import { withCustomEditor } from '@/plugins';
 import { withHistory } from 'slate-history';
 import { withReact } from 'slate-react';
-import { createEditor, Editor } from 'slate';
+import { createEditor, Descendant, Editor, Transforms } from 'slate';
 import { AppFlowyEditor, EditorData } from '@/types';
 import { transformToSlateData } from '@/lib/transform';
 import { EditorContext } from '@/editor/context';
@@ -21,19 +21,23 @@ export const EditorProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
   const editor = useMemo(() => withCustomEditor(withHistory(withReact(createEditor()))), []);
-  const [, setClock] = useState(0);
 
-  const applyData = useCallback((data: EditorData) => {
-    editor.children = transformToSlateData(data);
+  const replaceContent = useCallback((newContent: Descendant[]) => {
+    Transforms.insertNodes(editor, newContent, { at: [0] });
+
+    for (let i = newContent.length; i < editor.children.length; i++) {
+      Transforms.delete(editor, { at: [newContent.length] });
+    }
     Editor.normalize(editor, { force: true });
-    setClock(prev => prev + 1);
   }, [editor]);
+  const applyData = useCallback((data: EditorData) => {
+    replaceContent(transformToSlateData(data));
+  }, [replaceContent]);
 
   const applyMarkdown = useCallback((markdown: string) => {
-    editor.children = markdownToSlateData(markdown);
-    Editor.normalize(editor, { force: true });
-    setClock(prev => prev + 1);
-  }, [editor]);
+    const newContent = markdownToSlateData(markdown);
+    replaceContent(newContent);
+  }, [replaceContent]);
 
   const appflowyEditor = useMemo(() => {
     return {
@@ -42,9 +46,5 @@ export const EditorProvider: React.FC<{
     };
   }, [applyData, applyMarkdown]);
 
-  const renderChildren = useCallback(() => {
-    return children;
-  }, [children]);
-
-  return <EditorContext.Provider value={{ editor, appflowyEditor }}>{renderChildren()}</EditorContext.Provider>;
+  return <EditorContext.Provider value={{ editor, appflowyEditor }}>{children}</EditorContext.Provider>;
 };

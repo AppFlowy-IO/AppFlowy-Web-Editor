@@ -52,7 +52,7 @@ function Main() {
     editor.applyMarkdown(markdown);
   }, [editor]);
 
-  return <Editor readOnly/>;
+  return <Editor readOnly initialValue={[]}/>;
 }
 
 function Markdown() {
