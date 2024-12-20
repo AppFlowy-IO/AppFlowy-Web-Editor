@@ -42,5 +42,9 @@ export const EditorProvider: React.FC<{
     };
   }, [applyData, applyMarkdown]);
 
-  return <EditorContext.Provider value={{ editor, appflowyEditor }}>{children}</EditorContext.Provider>;
+  const renderChildren = useCallback(() => {
+    return children;
+  }, [children]);
+
+  return <EditorContext.Provider value={{ editor, appflowyEditor }}>{renderChildren()}</EditorContext.Provider>;
 };
