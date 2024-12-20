@@ -23,11 +23,10 @@ export const EditorProvider: React.FC<{
   const editor = useMemo(() => withCustomEditor(withHistory(withReact(createEditor()))), []);
 
   const replaceContent = useCallback((newContent: Descendant[]) => {
-    Transforms.insertNodes(editor, newContent, { at: [0] });
+    editor.children = [];
 
-    for (let i = newContent.length; i < editor.children.length; i++) {
-      Transforms.delete(editor, { at: [newContent.length] });
-    }
+    Transforms.insertNodes(editor, newContent, { at: [0] });
+    
     Editor.normalize(editor, { force: true });
   }, [editor]);
   const applyData = useCallback((data: EditorData) => {

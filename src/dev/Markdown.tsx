@@ -1,5 +1,6 @@
 import { Editor, EditorProvider, useEditor } from '@/editor';
 import { useEffect } from 'react';
+import { NodeType } from '@/types';
 
 const markdown = `
 # Heading
@@ -52,7 +53,15 @@ function Main() {
     editor.applyMarkdown(markdown);
   }, [editor]);
 
-  return <Editor readOnly initialValue={[]}/>;
+  return <Editor readOnly initialValue={[{
+    type: NodeType.Paragraph,
+    delta: [{ insert: 'Loading...' }],
+    children: [],
+  }, {
+    type: NodeType.Paragraph,
+    delta: [{ insert: 'Loading...' }],
+    children: [],
+  }]}/>;
 }
 
 function Markdown() {
