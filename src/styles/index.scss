@@ -176,12 +176,12 @@
     @apply py-[2px] text-[1rem] font-semibold;
   }
 
-  
+
   div[data-block-type="todo_list"][data-checked="true"] {
     text-decoration: line-through;
     color: hsl(var(--muted-foreground));
 
-    .text-color > span {
+    .text-color span {
       color: hsl(var(--muted-foreground));
     }
 
