@@ -12,7 +12,6 @@ import {
 } from '@/components/ui/select';
 import './i18n';
 import { useTranslation } from 'react-i18next';
-import Markdown from '@/dev/Markdown.tsx';
 
 const initialValue: EditorData = [
   {
@@ -136,7 +135,6 @@ export default function App() {
         </EditorProvider>
       </div>
 
-      <Markdown/>
     </div>
   );
 }

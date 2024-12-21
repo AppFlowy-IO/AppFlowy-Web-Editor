@@ -187,5 +187,10 @@
   div[data-block-type="todo_list"][data-checked="true"] {
     text-decoration: line-through;
     color: hsl(var(--muted-foreground));
+
+    .text-color > span {
+      color: hsl(var(--muted-foreground));
+    }
+
   }
 }

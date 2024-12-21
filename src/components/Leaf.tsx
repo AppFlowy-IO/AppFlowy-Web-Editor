@@ -29,6 +29,7 @@ function Leaf({ attributes, children, leaf }: RenderLeafProps) {
     style.backgroundColor = renderColor(leaf.bg_color);
   }
   if (leaf.font_color) {
+    classList.push('text-color');
     style.color = renderColor(leaf.font_color);
   }
 

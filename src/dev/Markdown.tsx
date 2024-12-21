@@ -1,6 +1,5 @@
 import { Editor, EditorProvider, useEditor } from '@/editor';
 import { useEffect } from 'react';
-import { NodeType } from '@/types';
 
 const markdown = `
 # Heading
