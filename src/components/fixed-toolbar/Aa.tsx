@@ -17,7 +17,7 @@ function Aa() {
       onClick: () => {
         turnToType(editor, type);
       },
-      size: 'default',
+      size: 'icon',
       disabled: readOnly || !focused,
       variant: 'ghost',
       className: 'justify-start',
