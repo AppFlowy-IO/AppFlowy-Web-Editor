@@ -99,9 +99,15 @@ function NumberedList({ attributes, children, element }: RenderElementProps) {
   const readOnly = useReadOnly();
   return (
     <div {...attributes} className={'flex gap-1'} data-block-type={element.type}>
-      <span onMouseDown={(e) => {
-        e.preventDefault();
-      }} className={'min-w-5 h-6 flex justify-center'} contentEditable={false} data-number={dataNumber}/>
+      <span
+        data-playwright-selected={false}
+        onMouseDown={(e) => {
+          e.preventDefault();
+        }} className={'min-w-5 font-medium h-6 text-center'}
+        contentEditable={false}
+        data-number={dataNumber}
+      >{dataNumber}.</span>
+
       <span className={'flex-1'} suppressContentEditableWarning contentEditable={!readOnly}>
         {children}
       </span>

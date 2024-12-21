@@ -176,14 +176,7 @@
     @apply py-[2px] text-[1rem] font-semibold;
   }
 
-
-  div[data-block-type="numbered_list"] > span:first-child {
-    &:after {
-      content: attr(data-number) ".";
-      font-weight: 500;
-    }
-  }
-
+  
   div[data-block-type="todo_list"][data-checked="true"] {
     text-decoration: line-through;
     color: hsl(var(--muted-foreground));
