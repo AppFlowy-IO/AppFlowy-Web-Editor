@@ -37,7 +37,7 @@ function Checkbox({ attributes, children, element }: RenderElementProps) {
   }, [readOnly]);
 
   return (
-    <div {...attributes} className={'flex items-center gap-1'} data-block-type={element.type}
+    <div {...attributes} className={'flex gap-1'} data-block-type={element.type}
          data-checked={data.checked}>
       <span
         onClick={handleClick}

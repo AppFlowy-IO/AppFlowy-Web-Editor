@@ -38,6 +38,7 @@ function List() {
       disabled: readOnly || !focused,
     } as ButtonProps;
   }, [editor, handleClick, readOnly, focused]);
+
   return (
     <>
       <Button {...getButtonProps(NodeType.Todo)}>
