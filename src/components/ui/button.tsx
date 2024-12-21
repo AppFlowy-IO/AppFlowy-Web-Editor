@@ -45,10 +45,11 @@ export interface ButtonProps
   asChild?: boolean;
   color?: 'default' | 'primary' | 'secondary';
   startIcon?: React.ReactNode;
+  endIcon?: React.ReactNode;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, color, startIcon, ...props }, ref) => {
+  ({ className, variant, size, asChild = false, color, startIcon, endIcon, ...props }, ref) => {
     const Comp = asChild ? Slot : 'button';
     return (
       <Comp
@@ -58,6 +59,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       >
         {startIcon}
         {props.children}
+        {endIcon}
       </Comp>
     );
   },

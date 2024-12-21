@@ -135,7 +135,7 @@
   }
 
   div[data-slate-node="element"]:not([data-block-type="nested-block"]) {
-    @apply py-1 relative;
+    @apply py-1 relative whitespace-pre-wrap break-words;
   }
 
   div[data-slate-node="element"] div[data-slate-placeholder="true"] {

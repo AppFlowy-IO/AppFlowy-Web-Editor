@@ -7,6 +7,7 @@ import { Button, ButtonProps } from '@/components/ui/button';
 import Checkbox from '@/assets/checkbox.svg?react';
 import NumberedList from '@/assets/numbered_list.svg?react';
 import BulletedList from '@/assets/bulleted_list.svg?react';
+import QuoteIcon from '@/assets/quote.svg?react';
 
 function List() {
   const readOnly = useReadOnly();
@@ -44,7 +45,9 @@ function List() {
       <Button {...getButtonProps(NodeType.Todo)}>
         <Checkbox className={'!w-5 !h-5'}/>
       </Button>
-
+      <Button {...getButtonProps(NodeType.Quote)}>
+        <QuoteIcon className={'!w-5 !h-5'}/>
+      </Button>
       <Button {...getButtonProps(NodeType.BulletedList)}>
         <BulletedList className={'!w-5 !h-5'}/>
       </Button>
