@@ -14,7 +14,8 @@ import { getMark } from '@/lib/editor';
 import { useFocused, useReadOnly, useSlate } from 'slate-react';
 import { InlineType } from '@/types';
 import ColorTheme from '@/assets/color_theme.svg?react';
-import FontColorIcon from '@/assets/font_color.svg?react';
+import FontColorIcon from '@/assets/icon_fontcolor.svg?react';
+import Line from '@/assets/line-1.svg?react';
 
 import { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from '@/i18n';
@@ -120,13 +121,15 @@ function Color() {
               <TooltipContent>{color.label}</TooltipContent>
               <TooltipTrigger>
                 <div
-                  className={'h-6 relative w-6 flex cursor-pointer items-center justify-center'}
-                  onClick={() => handlePickedColor(InlineType.FontColor, color.color)}
                   style={{
-                    color: color.color || 'var(--foreground)',
+                    borderColor: activeFontColor === color.color ? 'hsl(var(--primary))' : undefined,
                   }}
+                  className={`h-6 rounded-[6px] border hover:!border-primary border-secondary relative w-6 flex cursor-pointer items-center justify-center`}
+                  onClick={() => handlePickedColor(InlineType.FontColor, color.color)}
                 >
-                  <FontColorIcon/>
+                  <FontColorIcon style={{
+                    color: color.color || 'var(--foreground)',
+                  }}/>
                 </div>
               </TooltipTrigger>
 
@@ -146,21 +149,14 @@ function Color() {
               <TooltipTrigger>
                 <div
                   key={index}
-                  className={'h-6 relative w-6 overflow-hidden flex items-center rounded-[6px] cursor-pointer justify-center'}
+                  style={{
+                    backgroundColor: renderColor(color.color),
+                    borderColor: activeBgColor === color.color ? 'hsl(var(--primary))' : undefined,
+                  }}
+                  className={'h-6 relative hover:!border-primary border border-secondary cursor-pointer w-6 overflow-hidden flex items-center rounded-[6px] justify-center'}
                   onClick={() => handlePickedColor(InlineType.BgColor, color.color)}
                 >
-                  <div
-                    className={`w-full h-full absolute top-0 left-0 rounded-[6px] border-2`}
-                    style={{
-                      borderColor: renderColor(color.color),
-                    }}
-                  />
-                  <div
-                    className={'w-full h-full opacity-50 hover:opacity-100 z-[1]'}
-                    style={{
-                      backgroundColor: renderColor(color.color),
-                    }}
-                  />
+                  {!color.color && <Line className={'w-full h-full'}/>}
                 </div>
 
               </TooltipTrigger>
@@ -170,7 +166,7 @@ function Color() {
         </div>
       </div>
     </div>;
-  }, [editorBgColors, editorTextColors, handlePickedColor, t]);
+  }, [activeBgColor, activeFontColor, editorBgColors, editorTextColors, handlePickedColor, t]);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
