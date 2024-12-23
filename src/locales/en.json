@@ -27,6 +27,10 @@
     "textColor": "Text Color",
     "heading": "Heading {{level}}",
     "paragraph": "Paragraph",
-    "blockquote": "Blockquote"
+    "blockquote": "Blockquote",
+    "bodyText": "Body Text",
+    "bulletedList": "Bulleted List",
+    "numberedList": "Numbered List",
+    "quote": "Quote"
   }
 }

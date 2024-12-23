@@ -10,7 +10,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { isMarkActive } from '@/lib/editor';
+import { getMark } from '@/lib/editor';
 import { useFocused, useReadOnly, useSlate } from 'slate-react';
 import { InlineType } from '@/types';
 import ColorTheme from '@/assets/color_theme.svg?react';
@@ -20,12 +20,14 @@ import { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from '@/i18n';
 
 import { ColorEnum, renderColor } from '@/lib/color';
+import { ChevronDown } from 'lucide-react';
 
 function Color() {
   const readOnly = useReadOnly();
   const focused = useFocused() && document.getSelection()?.type !== 'Node';
   const editor = useSlate();
-  const isActive = isMarkActive(editor, InlineType.BgColor) || isMarkActive(editor, InlineType.FontColor);
+  const activeBgColor = getMark(editor, InlineType.BgColor) as string;
+  const activeFontColor = getMark(editor, InlineType.FontColor) as string;
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
 
@@ -173,13 +175,15 @@ function Color() {
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button variant={'ghost'} size={'icon'} onMouseDown={e => {
+        <Button style={{
+          color: activeFontColor ? renderColor(activeFontColor) : undefined,
+          backgroundColor: activeBgColor ? renderColor(activeBgColor) : undefined,
+        }} variant={'ghost'} size={'icon'} onMouseDown={e => {
           e.preventDefault();
           e.stopPropagation();
-        }} disabled={readOnly || !focused} color={
-          isActive ? 'primary' : 'secondary'
-        }>
+        }} disabled={readOnly || !focused}>
           <ColorTheme className={'!w-5 !h-5'}/>
+          <ChevronDown className="h-4 w-4"/>
         </Button>
       </PopoverTrigger>
 

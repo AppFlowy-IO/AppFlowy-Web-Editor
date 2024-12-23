@@ -40,6 +40,11 @@ export function isMarkActive(editor: Editor, format: InlineType) {
   return marks ? !!marks[format] : false;
 }
 
+export function getMark(editor: Editor, format: InlineType) {
+  const marks = Editor.marks(editor);
+  return marks ? marks[format] : null;
+}
+
 export function toggleTodoList(editor: Editor, at?: Location) {
   const { selection } = editor;
   const newAt = at || selection;

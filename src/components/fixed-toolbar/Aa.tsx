@@ -6,13 +6,16 @@ import { getBlock, turnToType } from '@/lib/editor';
 import { NodeType } from '@/types';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { CheckIcon, ChevronDown } from 'lucide-react';
-import { Separator } from '@/components/ui/separator';
-import BIUS from '@/components/fixed-toolbar/BIUS';
 import { useTranslation } from '@/i18n';
 import H1 from '@/assets/h1.svg?react';
 import H2 from '@/assets/h2.svg?react';
 import H3 from '@/assets/h3.svg?react';
+import NumberedList from '@/assets/numbered_list.svg?react';
+import BulletedList from '@/assets/bulleted_list.svg?react';
+import QuoteIcon from '@/assets/quote.svg?react';
 import { ElementData } from '@/@types/editor';
+import { Separator } from '@/components/ui/separator';
+import React from 'react';
 
 function Aa() {
   const { t } = useTranslation();
@@ -35,7 +38,7 @@ function Aa() {
       },
       disabled: readOnly || !focused,
       variant: 'ghost',
-      className: 'justify-start',
+      className: 'justify-between',
     } as ButtonProps;
   }, [editor, readOnly, focused]);
   const type = entry?.[0].type;
@@ -43,6 +46,13 @@ function Aa() {
   const options = useMemo(() => {
 
     return [
+      {
+        key: 'p',
+        type: NodeType.Paragraph,
+        label: t('bodyText'),
+        startIcon: Text,
+        checked: type === NodeType.Paragraph,
+      },
       {
         key: 'h1',
         type: NodeType.Heading,
@@ -74,11 +84,25 @@ function Aa() {
         checked: type === NodeType.Heading && data?.level === 3,
       },
       {
-        key: 'p',
-        type: NodeType.Paragraph,
-        label: t('paragraph'),
-        startIcon: Text,
-        checked: type === NodeType.Paragraph,
+        key: 'ol',
+        type: NodeType.NumberedList,
+        label: t('numberedList'),
+        startIcon: NumberedList,
+        checked: type === NodeType.NumberedList,
+      },
+      {
+        key: 'ul',
+        type: NodeType.BulletedList,
+        label: t('bulletedList'),
+        startIcon: BulletedList,
+        checked: type === NodeType.BulletedList,
+      },
+      {
+        key: 'quote',
+        type: NodeType.Quote,
+        label: t('quote'),
+        startIcon: QuoteIcon,
+        checked: type === NodeType.Quote,
       },
     ];
   }, [data?.level, t, type]);
@@ -102,19 +126,15 @@ function Aa() {
       <PopoverContent
         align={'center'}
         sideOffset={4}
+        className={'w-[240px]'}
         onOpenAutoFocus={e => e.preventDefault()}
         onCloseAutoFocus={e => e.preventDefault()}>
-        <div className={'flex flex-col w-full gap-2 p-2'}>
-          <div className={'flex w-full justify-center items-center gap-1'}>
-            <BIUS/>
-          </div>
-          <Separator/>
-          <div className={'flex flex-col gap-1'}>
-            {
-              options.map(option => {
-                return (
+        <div className={'flex flex-col text-sm gap-1 '}>
+          {
+            options.map((option, index) => {
+              return (
+                <React.StrictMode key={index}>
                   <Button
-                    key={option.key}
                     {...getButtonProps(option.type, option.checked, option.data)}
                     startIcon={
                       <option.startIcon className={'!w-5 !h-5'}/>
@@ -123,12 +143,13 @@ function Aa() {
                       option.checked ? <CheckIcon className={'!w-5 !h-5 ml-2 text-primary'}/> : null
                     }
                   >
-                    {option.label}
+                    <div className={'text-left flex-1'}>{option.label}</div>
                   </Button>
-                );
-              })
-            }
-          </div>
+                  {index === 3 && <Separator/>}
+                </React.StrictMode>
+              );
+            })
+          }
         </div>
       </PopoverContent>
     </Popover>
