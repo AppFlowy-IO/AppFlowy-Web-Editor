@@ -30,7 +30,7 @@ export const withCustomEditor = (editor: ReactEditor) => {
             return;
           }
         }
-        if (node.type === NodeType.Heading) {
+        if ([NodeType.Heading, NodeType.Quote].includes(node.type as NodeType)) {
           insertBreak();
           turnToType(editor, NodeType.Paragraph);
           return;
