@@ -10,12 +10,11 @@ import { useTranslation } from '@/i18n';
 import H1 from '@/assets/h1.svg?react';
 import H2 from '@/assets/h2.svg?react';
 import H3 from '@/assets/h3.svg?react';
-import NumberedList from '@/assets/numbered_list.svg?react';
-import BulletedList from '@/assets/bulleted_list.svg?react';
 import QuoteIcon from '@/assets/quote.svg?react';
 import { ElementData } from '@/@types/editor';
 import { Separator } from '@/components/ui/separator';
 import React from 'react';
+import BIUS from '@/components/fixed-toolbar/BIUS';
 
 function Aa() {
   const { t } = useTranslation();
@@ -84,20 +83,6 @@ function Aa() {
         checked: type === NodeType.Heading && data?.level === 3,
       },
       {
-        key: 'ol',
-        type: NodeType.NumberedList,
-        label: t('numberedList'),
-        startIcon: NumberedList,
-        checked: type === NodeType.NumberedList,
-      },
-      {
-        key: 'ul',
-        type: NodeType.BulletedList,
-        label: t('bulletedList'),
-        startIcon: BulletedList,
-        checked: type === NodeType.BulletedList,
-      },
-      {
         key: 'quote',
         type: NodeType.Quote,
         label: t('quote'),
@@ -124,12 +109,17 @@ function Aa() {
         </Button>
       </PopoverTrigger>
       <PopoverContent
-        align={'center'}
+        align={'start'}
         sideOffset={4}
         className={'w-[240px]'}
         onOpenAutoFocus={e => e.preventDefault()}
         onCloseAutoFocus={e => e.preventDefault()}>
-        <div className={'flex flex-col text-sm gap-1 '}>
+        <div className={'text-sm gap-4 flex justify-center'}>
+          <BIUS/>
+        </div>
+
+        <Separator className={'my-2'}/>
+        <div className={'flex flex-col text-sm gap-2 '}>
           {
             options.map((option, index) => {
               return (
