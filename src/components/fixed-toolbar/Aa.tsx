@@ -115,7 +115,9 @@ function Aa() {
         onOpenAutoFocus={e => e.preventDefault()}
         onCloseAutoFocus={e => e.preventDefault()}>
         <div className={'text-sm gap-4 flex justify-center'}>
-          <BIUS/>
+          <BIUS onAfterChange={() => {
+            setOpen(false);
+          }}/>
         </div>
 
         <Separator className={'my-2'}/>

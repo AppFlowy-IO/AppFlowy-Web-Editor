@@ -8,7 +8,11 @@ import ItalicIcon from '@/assets/italic.svg?react';
 import UnderlineIcon from '@/assets/underline.svg?react';
 import StrikethroughIcon from '@/assets/strikethrough.svg?react';
 
-function BUIS() {
+function BUIS({
+  onAfterChange,
+}: {
+  onAfterChange?: () => void;
+}) {
   const editor = useSlate();
   const readOnly = useReadOnly();
   const focused = useFocused() && document.getSelection()?.type !== 'Node';
@@ -41,9 +45,10 @@ function BUIS() {
         editor.addMark(format, true);
       }
 
+      onAfterChange?.();
       setMarks(getMarks());
     };
-  }, [editor, getMarks]);
+  }, [onAfterChange, editor, getMarks]);
 
   const getFormatButtonProps = useCallback((format: InlineType) => {
     return {
