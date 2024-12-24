@@ -22,6 +22,7 @@ import { useTranslation } from '@/i18n';
 
 import { ColorEnum, renderColor } from '@/lib/color';
 import { ChevronDown } from 'lucide-react';
+import { Editor } from 'slate';
 
 function Color() {
   const readOnly = useReadOnly();
@@ -101,11 +102,7 @@ function Color() {
   }, [t]);
 
   const handlePickedColor = useCallback((format: InlineType, color: string) => {
-    if (color) {
-      editor.addMark(format, color);
-    } else {
-      editor.removeMark(format);
-    }
+    Editor.addMark(editor, format, color);
     setOpen(false);
   }, [editor]);
 

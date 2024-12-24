@@ -68,10 +68,11 @@ export const withCustomEditor = (editor: ReactEditor) => {
 
     const {
       always,
+      voids,
     } = options || {};
     splitNodes(options);
 
-    if (always) {
+    if (always && !voids) {
       const marks = Editor.marks(editor);
       Object.keys(marks || {}).forEach(mark => {
         editor.removeMark(mark);
