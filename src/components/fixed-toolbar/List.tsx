@@ -41,13 +41,13 @@ function List() {
   return (
     <>
       <Button {...getButtonProps(NodeType.Todo)}>
-        <Checkbox className={'!w-5 !h-5'}/>
+        <Checkbox className={'!w-4 !h-4'}/>
       </Button>
       <Button {...getButtonProps(NodeType.NumberedList)}>
-        <NumberedList className={'!w-5 !h-5'}/>
+        <NumberedList className={'!w-4 !h-4'}/>
       </Button>
       <Button {...getButtonProps(NodeType.BulletedList)}>
-        <BulletedList className={'!w-5 !h-5'}/>
+        <BulletedList className={'!w-4 !h-4'}/>
       </Button>
     </>
   );

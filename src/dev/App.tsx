@@ -1,4 +1,4 @@
-import { Editor, EditorData, NodeType, EditorProvider } from '../index';
+import { Editor, EditorData, NodeType, EditorProvider, FixedToolbar } from '../index';
 import { useCallback, useState } from 'react';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
@@ -125,6 +125,7 @@ export default function App() {
       <div className={'h-[500px] w-full'}>
         <EditorProvider>
           <Editor
+            ToolbarComponent={FixedToolbar}
             modalZIndex={1000}
             locale={{
               lang,

@@ -103,8 +103,8 @@ function Aa() {
             e.preventDefault();
             e.stopPropagation();
           }} disabled={readOnly || !focused} color={'secondary'}>
-          {selectedOption?.startIcon ? <selectedOption.startIcon className={'!w-5 !h-5 text-primary'}/> : <Text
-            className={'!w-5 !h-5'}/>}
+          {selectedOption?.startIcon ? <selectedOption.startIcon className={'!w-4 !h-4 text-primary'}/> : <Text
+            className={'!w-4 !h-4'}/>}
           <ChevronDown className="h-4 w-4"/>
         </Button>
       </PopoverTrigger>
@@ -127,7 +127,7 @@ function Aa() {
                   <Button
                     {...getButtonProps(option.type, option.checked, option.data)}
                     startIcon={
-                      <option.startIcon className={'!w-5 !h-5'}/>
+                      <option.startIcon className={'!w-4 !h-4'}/>
                     }
                     endIcon={
                       option.checked ? <CheckIcon className={'!w-5 !h-5 ml-2 text-primary'}/> : null

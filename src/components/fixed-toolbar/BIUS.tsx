@@ -57,16 +57,16 @@ function BUIS() {
   return (
     <>
       <Button {...getFormatButtonProps(InlineType.Bold)}>
-        <BoldIcon className={'!w-5 !h-5'}/>
+        <BoldIcon className={'!w-4 !h-4'}/>
       </Button>
       <Button {...getFormatButtonProps(InlineType.Italic)}>
-        <ItalicIcon className={'!w-5 !h-5'}/>
+        <ItalicIcon className={'!w-4 !h-4'}/>
       </Button>
       <Button {...getFormatButtonProps(InlineType.Underline)}>
-        <UnderlineIcon className={'!w-5 !h-5'}/>
+        <UnderlineIcon className={'!w-4 !h-4'}/>
       </Button>
       <Button {...getFormatButtonProps(InlineType.Strikethrough)}>
-        <StrikethroughIcon className={'!w-5 !h-5'}/>
+        <StrikethroughIcon className={'!w-4 !h-4'}/>
       </Button>
     </>
   );

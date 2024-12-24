@@ -175,7 +175,7 @@ function Color() {
           e.preventDefault();
           e.stopPropagation();
         }} disabled={readOnly || !focused}>
-          <ColorTheme className={'!w-5 !h-5'}/>
+          <ColorTheme className={'!w-4 !h-4'}/>
           <ChevronDown className="h-4 w-4"/>
         </Button>
       </PopoverTrigger>
