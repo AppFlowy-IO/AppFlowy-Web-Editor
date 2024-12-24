@@ -4,7 +4,6 @@ import Aa from '@/components/fixed-toolbar/Aa';
 import { Separator } from '@/components/ui/separator';
 
 export function FixedToolbar() {
-
   return (
     <div onMouseDown={e => {
       e.preventDefault();
@@ -12,12 +11,9 @@ export function FixedToolbar() {
     }} className={'flex items-center py-3 px-4 flex-wrap gap-2'}>
       <Aa/>
       <Separator className={'h-4'} orientation={'vertical'}/>
-
       <List/>
       <Separator className={'h-4'} orientation={'vertical'}/>
-
       <Color/>
-
     </div>
   );
 }

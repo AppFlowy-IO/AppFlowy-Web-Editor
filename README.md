@@ -60,6 +60,23 @@ const App = () => {
 export default App;
 ```
 
+## 🎨 Custom Toolbar
+
+The AppFlowy Web Editor provides a toolbar with various options for editing content. You can customize the toolbar by
+passing the `ToolbarComponent` prop to the `Editor` component.
+
+```tsx
+import { Editor, EditorProvider, FixedToolbar } from '@appflowyinc/editor';
+
+const App = () => {
+  return <EditorProvider>
+    <Editor ToolbarComponent={FixedToolbar}/>
+  </EditorProvider>;
+};
+
+export default App;
+```
+
 ## 📚 Apply Data
 
 You can get `editor` from the `useEditor` hook and apply data to the editor.
@@ -180,14 +197,15 @@ export default App;
 
 ### Editor Props
 
-| Prop         | Type                                                   | Default   | Description                          |
-|--------------|--------------------------------------------------------|-----------|--------------------------------------|
-| theme        | `'light' \| 'dark'`                                    | `'light'` | Editor theme                         |
-| locale       | `{ lang: string; resources?: Record<string, string> }` | -         | Editor language configuration        |
-| readOnly     | `boolean`                                              | `false`   | Whether the editor is read-only      |
-| onChange     | `(data: EditorData) => void`                           | -         | Callback when editor content changes |
-| initialValue | `EditorData`                                           | -         | Initial editor content               |
-| modalZIndex  | `number`                                               | 50        | Editor modal z-index                 |
+| Prop             | Type                                                   | Default   | Description                          |
+|------------------|--------------------------------------------------------|-----------|--------------------------------------|
+| theme            | `'light' \| 'dark'`                                    | `'light'` | Editor theme                         |
+| locale           | `{ lang: string; resources?: Record<string, string> }` | -         | Editor language configuration        |
+| readOnly         | `boolean`                                              | `false`   | Whether the editor is read-only      |
+| onChange         | `(data: EditorData) => void`                           | -         | Callback when editor content changes |
+| initialValue     | `EditorData`                                           | -         | Initial editor content               |
+| modalZIndex      | `number`                                               | 50        | Editor modal z-index                 |
+| ToolbarComponent | `FC`                                                   | -         | Custom toolbar component             |
 
 ### EditorProvider Props
 

@@ -1,3 +1,5 @@
+import { FC } from 'react';
+
 export * from './element';
 
 import { Op } from 'quill-delta';
@@ -82,5 +84,6 @@ export interface EditorProps {
   theme?: 'light' | 'dark';
   readOnly?: boolean;
   modalZIndex?: number;
+  ToolbarComponent?: FC;
 }
 

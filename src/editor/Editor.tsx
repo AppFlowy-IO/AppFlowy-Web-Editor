@@ -17,6 +17,7 @@ export function Editor({
   onChange,
   initialValue: initialValueProp,
   modalZIndex,
+  ToolbarComponent,
 }: EditorProps) {
   const context = useContext(EditorContext);
   if (!context) {
@@ -61,7 +62,8 @@ export function Editor({
     <EditorI18nContext.Provider value={editorI18n}>
       <div
         className="appflowy-editor flex flex-col selection:bg-selection w-full text-foreground overflow-hidden">
-        <RichText editor={context.editor} onChange={handleChange} initialValue={value} readOnly={readOnly}/>
+        <RichText ToolbarComponent={ToolbarComponent} editor={context.editor} onChange={handleChange}
+                  initialValue={value} readOnly={readOnly}/>
       </div>
     </EditorI18nContext.Provider>
   );

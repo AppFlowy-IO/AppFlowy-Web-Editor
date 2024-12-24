@@ -1,9 +1,8 @@
-import { useCallback } from 'react';
+import { FC, useCallback } from 'react';
 import { Editable, Slate, ReactEditor } from 'slate-react';
 import {
   Descendant, NodeEntry, Operation,
 } from 'slate';
-import { FixedToolbar } from '@/components/fixed-toolbar';
 import Element from '../components/element/Element';
 import Leaf from '@/components/Leaf';
 import { useKeydown } from '@/editor/useKeydown';
@@ -22,9 +21,16 @@ export interface RichTextProps {
   onChange?: (ops: Operation[], value: Descendant[]) => void;
   initialValue?: Descendant[];
   editor: ReactEditor;
+  ToolbarComponent?: FC;
 }
 
-const RichText = ({ editor, readOnly, onChange, initialValue = defaultInitialValue }: RichTextProps) => {
+const RichText = ({
+  editor,
+  readOnly,
+  onChange,
+  ToolbarComponent,
+  initialValue = defaultInitialValue,
+}: RichTextProps) => {
   const { t } = useTranslation();
 
   const handleOnChange = useCallback((value: Descendant[]) => {
@@ -36,7 +42,7 @@ const RichText = ({ editor, readOnly, onChange, initialValue = defaultInitialVal
   const codeDecorate = useDecorate(editor);
   return (
     <Slate editor={editor} onChange={handleOnChange} initialValue={initialValue}>
-      {!readOnly && <FixedToolbar/>}
+      {ToolbarComponent && <ToolbarComponent/>}
       <Editable
         readOnly={readOnly}
         className={'outline-none flex-1 h-auto px-5'}
