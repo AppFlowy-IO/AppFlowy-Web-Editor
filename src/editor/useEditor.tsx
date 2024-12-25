@@ -29,7 +29,7 @@ export const EditorProvider: React.FC<{
         children: [{ text: '' }],
       });
     }
-    
+
     editor.children = newContent;
 
     editor.select(editor.start([0]));

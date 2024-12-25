@@ -36,7 +36,10 @@ Note: This package requires these peer dependencies to be installed:
     "i18next-resources-to-backend": "^1.2.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-i18next": "^14.1.0"
+    "react-i18next": "^14.1.0",
+    "slate": "^0.112.0",
+    "slate-history": "^0.110.3",
+    "slate-react": "^0.112.0"
 }
 ```
 

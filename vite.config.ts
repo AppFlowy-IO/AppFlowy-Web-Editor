@@ -71,6 +71,9 @@ export default defineConfig(({ command }) => {
           'i18next',
           'react-i18next',
           'i18next-resources-to-backend',
+          'slate',
+          'slate-react',
+          'slate-history',
         ],
         output: {
           globals: {
