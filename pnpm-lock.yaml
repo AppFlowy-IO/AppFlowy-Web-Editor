@@ -22,9 +22,6 @@ dependencies:
   '@radix-ui/react-tooltip':
     specifier: ^1.1.6
     version: 1.1.6(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1)(react@18.3.1)
-  '@types/prismjs':
-    specifier: ^1.26.5
-    version: 1.26.5
   class-variance-authority:
     specifier: ^0.7.1
     version: 0.7.1
@@ -96,6 +93,9 @@ devDependencies:
   '@types/node':
     specifier: ^22.10.2
     version: 22.10.2
+  '@types/prismjs':
+    specifier: ^1.26.5
+    version: 1.26.5
   '@types/react':
     specifier: ^18.3.12
     version: 18.3.12
@@ -1881,7 +1881,7 @@ packages:
 
   /@types/prismjs@1.26.5:
     resolution: {integrity: sha512-AUZTa7hQ2KY5L7AmtSiqxlhWxb4ina0yd8hNbl4TWuqnv/pFP0nDMb3YrfSBf4hJVGLh2YEIBfKaBW/9UEl6IQ==}
-    dev: false
+    dev: true
 
   /@types/prop-types@15.7.14:
     resolution: {integrity: sha512-gNMvNH49DJ7OJYv+KAKn0Xp45p8PLl6zo2YnvDIbTd4J6MER2BmWN49TG7n9LvkyihINxeKW8+3bfS2yDC9dzQ==}
