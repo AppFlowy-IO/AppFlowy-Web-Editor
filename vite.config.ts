@@ -82,6 +82,14 @@ export default defineConfig(({ command }) => {
             i18next: 'i18next',
             'react-i18next': 'reactI18next',
           },
+          manualChunks(id) {
+            if (id.includes('mdast-util-from-markdown') ||
+              id.includes('micromark') ||
+              id.includes('prismjs')
+            ) {
+              return 'markdown';
+            }
+          },
         },
       },
       sourcemap: false,
