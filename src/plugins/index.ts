@@ -1,3 +1,4 @@
+import { withPasted } from '@/plugins/withPasted.ts';
 import { ReactEditor } from 'slate-react';
 import { Editor, Element, Range, Point, NodeEntry, Path } from 'slate';
 import { NodeType } from '@/types';
@@ -104,5 +105,5 @@ export const withCustomEditor = (editor: ReactEditor) => {
 
     deleteBackward(...args);
   };
-  return withMarkdown(editor);
+  return withPasted(withMarkdown(editor));
 };
