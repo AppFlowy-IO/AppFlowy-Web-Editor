@@ -2,6 +2,7 @@ export default {
   content: [
     './src/**/*.{js,jsx,ts,tsx}',
   ],
+  important: '#appflowy-editor',
   darkMode: ['class', 'class'],
   theme: {
     extend: {

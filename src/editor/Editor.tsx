@@ -1,6 +1,7 @@
 import { useCallback, useContext, useEffect, useMemo } from 'react';
 import { EditorProps } from '@/types';
 import '@/styles/index.scss';
+import '@/styles/editor.scss';
 import { initI18n, EditorI18nContext } from '@/i18n/config';
 import { addResourceBundle, changeLanguage } from '@/i18n';
 import RichText from './RichText';
@@ -61,6 +62,7 @@ export function Editor({
   return (
     <EditorI18nContext.Provider value={editorI18n}>
       <div
+        id={'appflowy-editor'}
         className="appflowy-editor flex flex-col selection:bg-selection w-full text-foreground overflow-hidden">
         <RichText ToolbarComponent={ToolbarComponent} editor={context.editor} onChange={handleChange}
                   initialValue={value} readOnly={readOnly}/>
