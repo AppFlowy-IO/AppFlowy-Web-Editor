@@ -39,7 +39,7 @@ export function transformFromSlateData(nodes: Descendant[]): EditorNode[] {
       return {
         type: node.type as NodeType,
         data: node.data,
-        delta: slateTextToDelta(node.children),
+        delta: slateTextToDelta(node.children || []),
         children: [],
       };
     }
@@ -48,7 +48,7 @@ export function transformFromSlateData(nodes: Descendant[]): EditorNode[] {
     return {
       type: mainParagraph.type as NodeType,
       data: node.data,
-      delta: slateTextToDelta(mainParagraph.children),
+      delta: slateTextToDelta(mainParagraph.children || []),
       children: transformFromSlateData(nestedParagraphs),
     };
   });

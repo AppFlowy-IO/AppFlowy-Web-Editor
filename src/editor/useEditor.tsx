@@ -32,7 +32,12 @@ export const EditorProvider: React.FC<{
 
     editor.children = newContent;
 
-    editor.select(editor.start([0]));
+    try {
+      editor.select(editor.start([0]));
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (_e) {
+      // Do nothing
+    }
 
     Editor.normalize(editor, { force: true });
   }, [editor]);
