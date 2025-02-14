@@ -31,6 +31,8 @@
     "bodyText": "Body Text",
     "bulletedList": "Bulleted List",
     "numberedList": "Numbered List",
-    "quote": "Quote"
+    "quote": "Quote",
+    "reloadImage": "Reload Image",
+    "imageLoadError": "Image load error: {{error}}"
   }
 }

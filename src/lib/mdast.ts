@@ -1,6 +1,9 @@
 import { fromMarkdown } from 'mdast-util-from-markdown';
+import { gfmFromMarkdown } from 'mdast-util-gfm';
+import { gfm } from 'micromark-extension-gfm';
+
 import type { RootContent as Content, Root } from 'mdast';
-import type { Descendant, Element as CustomElement, Text as CustomText } from 'slate';
+import type { Descendant, Text as CustomText } from 'slate';
 import { NodeType } from '@/types';
 
 interface FlatNode {
@@ -120,6 +123,7 @@ function flattenMdast(mdast: Content | Root): FlatNode[] {
             type: 'code',
           }],
         });
+
         break;
 
       case 'code': {
@@ -164,6 +168,38 @@ function flattenMdast(mdast: Content | Root): FlatNode[] {
           depth,
         });
         break;
+      case 'table':
+        console.log('table');
+        flatNodes.push({
+          type: NodeType.Table,
+          depth,
+          data: {},
+        });
+        if ('children' in node) {
+          flattenChildren(node.children, depth + 1);
+        }
+        break;
+
+      case 'tableRow':
+        flatNodes.push({
+          type: NodeType.TableRow,
+          depth,
+          data: {}
+        });
+        if ('children' in node) {
+          flattenChildren(node.children, depth + 1);
+        }
+        break;
+
+      case 'tableCell':
+        flatNodes.push({
+          type: NodeType.TableCell,
+          depth,
+        });
+        if ('children' in node) {
+          flattenChildren(node.children, depth + 1);
+        }
+        break;
     }
   }
 
@@ -190,7 +226,6 @@ function flattenMdast(mdast: Content | Root): FlatNode[] {
   traverse(mdast, 0);
   return flatNodes;
 }
-
 function buildSlateTree(flatNodes: FlatNode[]): Descendant[] {
   function createSlateNode(node: FlatNode): Descendant {
     if (node.type === 'text') {
@@ -223,49 +258,67 @@ function buildSlateTree(flatNodes: FlatNode[]): Descendant[] {
     };
   }
 
-  const stack: TreeBuilderNode[] = [];
+  // Initialize root node and stack
+  const root: TreeBuilderNode = { children: [] };
+  const stack: TreeBuilderNode[] = [root];
   let currentDepth = 0;
-  let currentNode: TreeBuilderNode = { children: [] };
-  let result = currentNode.children as Descendant[];
 
   flatNodes.forEach((node, index) => {
-    if (node.depth === currentDepth) {
-      if (stack.length > 0) {
-        const parentNode = stack[stack.length - 1];
-        (parentNode.children as Descendant[]).push(createSlateNode(node));
-      } else {
-        result.push(createSlateNode(node));
-      }
-    } else if (node.depth > currentDepth) {
-      const prevNode = flatNodes[index - 1];
-      if ([NodeType.Image, NodeType.LinkPreview].includes(prevNode.type as NodeType)) {
-        result.push({
-          type: NodeType.Paragraph,
-          children: [createSlateNode(node)],
-        });
-        return;
-      }
-      stack.push(currentNode);
-      const lastNode = result[result.length - 1] as CustomElement;
-      currentNode = lastNode;
-      result = lastNode.children;
-      result.push(createSlateNode(node));
-    } else {
-      while (currentDepth > node.depth && stack.length > 0) {
-        currentNode = stack.pop()!;
-        result = currentNode.children as Descendant[];
+    // Adjust stack until it matches current depth
+    if (node.depth < currentDepth) {
+      while (currentDepth > node.depth) {
+        stack.pop();
         currentDepth--;
       }
-      result.push(createSlateNode(node));
+    } else if (node.depth > currentDepth) {
+      // Handle child nodes of special nodes by creating a new paragraph node
+      const prevNode = flatNodes[index - 1];
+      if (prevNode && [NodeType.Image, NodeType.LinkPreview].includes(prevNode.type as NodeType)) {
+        const paragraphNode = {
+          type: NodeType.Paragraph,
+          children: [],
+        };
+        stack[stack.length - 1].children.push(paragraphNode);
+        stack.push(paragraphNode);
+      } else {
+        // Use the last created node as the new parent
+        const parent = stack[stack.length - 1];
+        if (parent.children.length === 0) {
+          // If parent has no children, create a new node
+          const newNode = createSlateNode(node);
+          parent.children.push(newNode);
+          if ('children' in newNode) {
+            stack.push(newNode as TreeBuilderNode);
+          }
+        } else {
+          // Use the last child as the new parent
+          const lastChild = parent.children[parent.children.length - 1] as TreeBuilderNode;
+          stack.push(lastChild);
+        }
+      }
+      currentDepth = node.depth;
     }
-    currentDepth = node.depth;
+
+    // Get current parent node from stack
+    const currentParent = stack[stack.length - 1];
+
+    // Create new node
+    const newNode = createSlateNode(node);
+
+    // Add node to current parent if it's a text node or has same depth
+    if (node.type === 'text' || node.depth === currentDepth) {
+      currentParent.children.push(newNode);
+    }
   });
 
-  return (stack[0]?.children ?? result) as Descendant[];
+  return root.children as Descendant[];
 }
 
 export function markdownToSlateData(markdown: string): Descendant[] {
-  const mdast = fromMarkdown(markdown);
+  const mdast = fromMarkdown(markdown, {
+    extensions: [gfm()],
+    mdastExtensions: [gfmFromMarkdown()]
+  });
   const flatNodes = mdast.children ? mdast.children.flatMap(node => flattenMdast(node)) : [];
   return buildSlateTree(flatNodes);
 }

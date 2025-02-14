@@ -9,6 +9,9 @@ import LinkPreview from '@/components/element/LinkPreview';
 import Image from '@/components/element/Image';
 import Divider from '@/components/element/Divider';
 import Code from '@/components/element/CodeBlock';
+import Table from '@/components/element/Table';
+import TableRow from '@/components/element/TableRow';
+import TableCell from '@/components/element/TableCell';
 
 export function Element({
   element,
@@ -48,6 +51,21 @@ export function Element({
         break;
       }
       return <Code {...{ attributes, children, element }} />;
+    case NodeType.Table:
+      if (!readOnly) {
+        break;
+      }
+      return <Table {...{ attributes, children, element }} />;
+    case NodeType.TableRow:
+      if (!readOnly) {
+        break;
+      }
+      return <TableRow {...{ attributes, children, element }} />;
+    case NodeType.TableCell:
+      if (!readOnly) {
+        break;
+      }
+      return <TableCell {...{ attributes, children, element }} />;
   }
 
   return (

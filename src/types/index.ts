@@ -21,6 +21,9 @@ export enum NodeType {
   LinkPreview = 'link_preview',
   Image = 'image',
   Divider = 'divider',
+  Table = 'simple_table',
+  TableRow = 'simple_table_row',
+  TableCell = 'simple_table_cell'
 }
 
 export enum InlineType {

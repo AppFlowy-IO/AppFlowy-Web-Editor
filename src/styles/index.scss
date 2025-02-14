@@ -59,6 +59,8 @@
     --tint-yellow: #FFF2CD;
     --badge-yellow: #FCD86F;
     --selection: #e0f8ff;
+    --scrollbar-thumb: #d1d5db;
+
   }
 
   :root[data-editor-theme="dark"] {
@@ -115,6 +117,8 @@
     --tint-orange: #D779224D;
     --badge-orange: #D77922;
     --selection: #005174;
+    --scrollbar-thumb: #4b5563;
+
   }
 }
 
@@ -177,4 +181,68 @@
     }
 
   }
+}
+
+
+@keyframes dots-loading {
+  20% {
+    background-position: 0% 0%, 50% 50%, 100% 50%;
+  }
+  40% {
+    background-position: 0% 100%, 50% 0%, 100% 50%;
+  }
+  60% {
+    background-position: 0% 50%, 50% 100%, 100% 0%;
+  }
+  80% {
+    background-position: 0% 50%, 50% 50%, 100% 100%;
+  }
+}
+
+.appflowy-editor {
+  table {
+    &.row-header-hl {
+      tbody > tr:first-child {
+        td [data-slate-node="text"] {
+          @apply font-semibold;
+        }
+      }
+    }
+
+    tr {
+      vertical-align: top;
+    }
+
+    tr td:first-child {
+      @apply border-l border-t border-border;
+    }
+
+    tr:first-child > td {
+      @apply border-t border-border;
+    }
+
+    td {
+      @apply border-r p-2 border-b border-border whitespace-pre-wrap break-words;
+    }
+  }
+}
+
+
+@mixin scrollbar-style {
+  ::-webkit-scrollbar, &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  &:hover {
+
+    &::-webkit-scrollbar-thumb, & *::-webkit-scrollbar-thumb {
+      border-radius: 4px;
+      background-color: var(--scrollbar-thumb);
+    }
+  }
+}
+
+.appflowy-scrollbar {
+  @include scrollbar-style;
 }

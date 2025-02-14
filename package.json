@@ -56,6 +56,10 @@
     "is-hotkey": "^0.2.0",
     "lucide-react": "^0.468.0",
     "mdast-util-from-markdown": "^2.0.2",
+    "mdast-util-gfm": "^3.1.0",
+    "mdast-util-gfm-table": "^2.0.0",
+    "micromark-extension-gfm": "^3.0.0",
+    "micromark-extension-gfm-table": "^2.1.1",
     "prismjs": "^1.29.0",
     "quill-delta": "^5.1.0",
     "sass": "^1.83.0",
@@ -64,11 +68,11 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "@types/prismjs": "^1.26.5",
     "@eslint/js": "^9.15.0",
     "@types/is-hotkey": "^0.1.10",
     "@types/mdast": "^4.0.4",
     "@types/node": "^22.10.2",
+    "@types/prismjs": "^1.26.5",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.4",

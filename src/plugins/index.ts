@@ -1,4 +1,4 @@
-import { withPasted } from '@/plugins/withPasted.ts';
+import { withPasted } from '@/plugins/withPasted';
 import { ReactEditor } from 'slate-react';
 import { Editor, Element, Range, Point, NodeEntry, Path } from 'slate';
 import { NodeType } from '@/types';
