@@ -7,6 +7,7 @@ import { Op } from 'quill-delta';
 export interface AppFlowyEditor {
   applyData: (data: EditorData) => void;
   applyMarkdown: (markdown: string) => void;
+  getData: () => EditorData;
 }
 
 export enum NodeType {

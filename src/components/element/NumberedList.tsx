@@ -67,9 +67,9 @@ function NumberedList({ attributes, children, element }: RenderElementProps) {
 
         prevPath = Path.previous(prevPath);
       }
+      // eslint-disable-next-line
     } catch (e) {
-      console.error(e);
-      console.log('editor', editor.children);
+      // do nothing
     }
 
     if (!topNode) {

@@ -4,7 +4,7 @@ import { withHistory } from 'slate-history';
 import { withReact } from 'slate-react';
 import { createEditor, Descendant, Editor } from 'slate';
 import { AppFlowyEditor, EditorData } from '@/types';
-import { transformToSlateData } from '@/lib/transform';
+import { transformFromSlateData, transformToSlateData } from '@/lib/transform';
 import { EditorContext } from '@/editor/context';
 import { markdownToSlateData } from '@/lib/mdast';
 
@@ -41,6 +41,7 @@ export const EditorProvider: React.FC<{
 
     Editor.normalize(editor, { force: true });
   }, [editor]);
+
   const applyData = useCallback((data: EditorData) => {
     replaceContent(transformToSlateData(data));
   }, [replaceContent]);
@@ -50,12 +51,19 @@ export const EditorProvider: React.FC<{
     replaceContent(newContent);
   }, [replaceContent]);
 
+
+  const getData = useCallback(() => {
+    const slateData = editor.children;
+    return transformFromSlateData(slateData);
+  }, [editor]);
+
   const appflowyEditor = useMemo(() => {
     return {
       applyData,
       applyMarkdown,
+      getData
     };
-  }, [applyData, applyMarkdown]);
+  }, [getData, applyData, applyMarkdown]);
 
   return <EditorContext.Provider value={{ editor, appflowyEditor }}>{children}</EditorContext.Provider>;
 };
