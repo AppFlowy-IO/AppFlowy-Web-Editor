@@ -25,6 +25,7 @@ export function transformToSlateData(nodes: EditorNode[]): Element[] {
   });
 }
 
+
 export function transformFromSlateData(nodes: Descendant[]): EditorNode[] {
   return nodes.map(node => {
     if (!Element.isElement(node)) {
@@ -35,22 +36,32 @@ export function transformFromSlateData(nodes: Descendant[]): EditorNode[] {
       };
     }
 
-    if (node.type !== NodeType.NestedBlock) {
-      return {
-        type: node.type as NodeType,
-        data: node.data,
-        delta: slateTextToDelta(node.children || []),
-        children: [],
-      };
+    if (node.children.length > 0 && 'type' in node.children[0]) {
+      if (node.type === NodeType.NestedBlock) {
+        const [mainParagraph, ...nestedParagraphs] = node.children as Element[];
+        return {
+          type: mainParagraph.type as NodeType,
+          data: node.data,
+          delta: slateTextToDelta(mainParagraph.children || []),
+          children: transformFromSlateData(nestedParagraphs),
+        };
+      } else {
+        return {
+          type: node.type as NodeType,
+          data: node.data,
+          children: transformFromSlateData(node.children),
+        };
+      }
+
     }
 
-    const [mainParagraph, ...nestedParagraphs] = node.children as Element[];
     return {
-      type: mainParagraph.type as NodeType,
+      type: node.type as NodeType,
       data: node.data,
-      delta: slateTextToDelta(mainParagraph.children || []),
-      children: transformFromSlateData(nestedParagraphs),
+      delta: slateTextToDelta(node.children || []),
+      children: [],
     };
+
   });
 }
 

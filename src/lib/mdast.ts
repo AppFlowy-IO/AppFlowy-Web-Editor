@@ -197,7 +197,10 @@ function flattenMdast(mdast: Content | Root): FlatNode[] {
           depth,
         });
         if ('children' in node) {
-          flattenChildren(node.children, depth + 1);
+          flattenChildren(node.children.map(item => ({
+            type: 'paragraph',
+            children: [item],
+          })), depth + 1);
         }
         break;
     }
