@@ -1,40 +1,83 @@
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import LoadingDots from '@/components/ui/loading-dots';
-import { useEffect, useState } from 'react';
 import { useTranslation } from '@/i18n';
+import { checkImage } from '@/lib/utils';
+import { AlertCircle } from 'lucide-react';
+import { useCallback, useEffect, useState } from 'react';
 import { RenderElementProps } from 'slate-react';
-import { AlertCircle  } from "lucide-react"
-
-import {
-  Alert,
-  AlertDescription,
-  AlertTitle,
-} from "@/components/ui/alert";
 
 function Image({ attributes, children, element }: RenderElementProps) {
   const url = (element.data?.url as string) || '';
+  const [localUrl, setLocalUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [imgError, setImgError] = useState<{
     ok: boolean;
     status: number;
     statusText: string;
   } | null>(null);
-  
-  const handleCheckImage = async (url: string) => {
+
+  const handleCheckImage = useCallback(async (url: string) => {
     setLoading(true);
-    checkImage(url).then(result => {
-      if (!result.ok) {
+
+    // Configuration for polling
+    const maxAttempts = 5;         // Maximum number of polling attempts
+    const pollingInterval = 6000;  // Time between attempts in milliseconds (3 seconds)
+    const timeoutDuration = 30000; // Maximum time to poll in milliseconds (30 seconds)
+
+    let attempts = 0;
+    const startTime = Date.now();
+
+    const attemptCheck: () => Promise<boolean> = async () => {
+      try {
+        const result = await checkImage(url);
+
+        // Success case
+        if (result.ok) {
+          setImgError(null);
+          setLoading(false);
+          setLocalUrl(result.validatedUrl || url);
+          return true;
+        }
+
+        // Error case but continue polling if within limits
         setImgError(result);
-      } else {
-        setImgError(null);
+
+        // Check if we've exceeded our timeout or max attempts
+        attempts++;
+        const elapsedTime = Date.now() - startTime;
+
+        if (attempts >= maxAttempts || elapsedTime >= timeoutDuration) {
+          setLoading(false); // Stop loading after max attempts or timeout
+          return false;
+        }
+
+        await new Promise(resolve => setTimeout(resolve, pollingInterval));
+        return await attemptCheck();
+        // eslint-disable-next-line
+      } catch (e) {
+        setImgError({ ok: false, status: 404, statusText: 'Image Not Found' });
+        // Check if we should stop trying
+        attempts++;
+        const elapsedTime = Date.now() - startTime;
+
+        if (attempts >= maxAttempts || elapsedTime >= timeoutDuration) {
+          setLoading(false);
+          return false;
+        }
+
+        // Continue polling after interval
+        await new Promise(resolve => setTimeout(resolve, pollingInterval));
+        return await attemptCheck();
       }
-      setLoading(false);
-    });
-  }
+    };
+
+    void attemptCheck();
+  }, []);
 
   useEffect(() => {
     void handleCheckImage(url);
-  }, [url]);
+  }, [handleCheckImage, url]);
   
   const reloadImage = () => {
     void handleCheckImage(url);
@@ -45,7 +88,7 @@ function Image({ attributes, children, element }: RenderElementProps) {
   return (
     <div {...attributes} className={`relative  min-h-[100px] w-full`}>
       <img
-        src={url}
+        src={localUrl || url}
         alt={''}
         onLoad={() => {
           setLoading(false);
@@ -63,7 +106,7 @@ function Image({ attributes, children, element }: RenderElementProps) {
         </div>
       ) : imgError ? (
         <div className={'absolute bg-background flex inset-0 justify-center w-full h-full'}>
-          <Alert variant="destructive" className={'flex items-center justify-between w-full'}>
+          <Alert variant="destructive" className={'flex gap-2 items-center justify-between w-full'}>
             <div className={'relative overflow-hidden w-full [&>svg]:absolute [&>svg]:left-0 [&>svg]:top-0 [&>svg~*]:pl-7'}>
               <AlertCircle className="h-4 w-4" />
               <AlertTitle>Oops!</AlertTitle>
@@ -89,28 +132,3 @@ function Image({ attributes, children, element }: RenderElementProps) {
 
 export default Image;
 
-const checkImage = async (url: string) => {
-  try {
-    const response = await fetch(url);
-    console.log(response);
-    if (!response.ok) {
-      return {
-        ok: false,
-        status: response.status,
-        statusText: response.statusText || "Status Text Not Available, and status code is " + response.status,
-      };
-    }
-    return {
-      ok: true,
-      status: response.status,
-      statusText: response.statusText,
-    };
-    // eslint-disable-next-line
-  } catch (e) {
-    return {
-      ok: false,
-      status: 500,
-      statusText: "Internal Server Error",
-    };
-  }
-};

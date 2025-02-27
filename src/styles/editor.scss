@@ -81,6 +81,9 @@
         td [data-slate-node="text"] {
           @apply font-semibold;
         }
+        td {
+          @apply bg-muted;
+        }
       }
     }
 

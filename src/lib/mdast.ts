@@ -169,16 +169,27 @@ function flattenMdast(mdast: Content | Root): FlatNode[] {
         });
         break;
       case 'table':
-        console.log('table');
+      {
+        const rows = node.children.filter(child => child.type === 'tableRow');
+        const columnsLength = rows[0]?.children.filter(child => child.type === 'tableCell').length;
+        const columnWidths: { [key: number]: number } = {};
+
+        for (let i = 0; i < columnsLength; i++) {
+          columnWidths[i] = 250;
+        }
         flatNodes.push({
           type: NodeType.Table,
           depth,
-          data: {},
+          data: {
+            enable_header_row: true,
+            column_widths: columnWidths,
+          },
         });
         if ('children' in node) {
           flattenChildren(node.children, depth + 1);
         }
         break;
+      }
 
       case 'tableRow':
         flatNodes.push({
