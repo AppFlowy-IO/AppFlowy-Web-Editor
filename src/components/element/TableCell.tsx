@@ -6,6 +6,7 @@ function TableCell({ attributes, children }: RenderElementProps) {
       {...attributes}
       rowSpan={1}
       colSpan={1}
+      data-block-type="table-cell"
     >
       <div
         className={'flex flex-col gap-1'}

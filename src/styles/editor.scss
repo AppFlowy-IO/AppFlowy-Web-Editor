@@ -100,7 +100,7 @@
     }
 
     td {
-      @apply border-r p-2 border-b border-border whitespace-pre-wrap break-words;
+      @apply border-r px-2 py-0.5 border-b border-border whitespace-pre-wrap break-words min-h-[37px];
     }
   }
 }
