@@ -22,7 +22,7 @@ function Image({ attributes, children, element }: RenderElementProps) {
 
     // Configuration for polling
     const maxAttempts = 5;         // Maximum number of polling attempts
-    const pollingInterval = 6000;  // Time between attempts in milliseconds (3 seconds)
+    const pollingInterval = 6000;  // Time between attempts in milliseconds (6 seconds)
     const timeoutDuration = 30000; // Maximum time to poll in milliseconds (30 seconds)
 
     let attempts = 0;
