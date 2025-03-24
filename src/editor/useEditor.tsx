@@ -2,7 +2,7 @@ import { useMemo, useContext, useCallback } from 'react';
 import { withCustomEditor } from '@/plugins';
 import { withHistory } from 'slate-history';
 import { withReact } from 'slate-react';
-import { createEditor, Descendant, Editor } from 'slate';
+import { createEditor, Descendant, Editor, Element } from 'slate';
 import { AppFlowyEditor, EditorData } from '@/types';
 import { transformFromSlateData, transformToSlateData } from '@/lib/transform';
 import { EditorContext } from '@/editor/context';
@@ -48,6 +48,17 @@ export const EditorProvider: React.FC<{
 
   const applyMarkdown = useCallback((markdown: string) => {
     const newContent = markdownToSlateData(markdown);
+    // Remove empty first and last lines
+    if (newContent.length > 1) {
+      const firstLine = newContent[0] as Element;
+      if (firstLine.type === 'paragraph' && firstLine.children.length === 0) {
+        newContent.shift();
+      }
+      const lastLine = newContent[0] as Element;
+      if (lastLine.type === 'paragraph' && lastLine.children.length === 0) {
+        newContent.pop();
+      }
+    }
     replaceContent(newContent);
   }, [replaceContent]);
 

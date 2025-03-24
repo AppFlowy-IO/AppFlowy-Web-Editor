@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import LoadingDots from '@/components/ui/loading-dots';
 import { useTranslation } from '@/i18n';
 import { checkImage } from '@/lib/utils';
+import { NodeType } from '@/types';
 import { AlertCircle } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
 import { RenderElementProps } from 'slate-react';
@@ -86,7 +87,10 @@ function Image({ attributes, children, element }: RenderElementProps) {
   const {t} = useTranslation();
 
   return (
-    <div {...attributes} className={`relative  min-h-[100px] w-full`}>
+    <div {...attributes} data-block-type={NodeType.Image} className={`relative min-h-[100px] w-full`}>
+      <div className={'absolute w-full h-full opacity-0'}>
+        {children}
+      </div>
       <img
         src={localUrl || url}
         alt={''}
@@ -99,7 +103,7 @@ function Image({ attributes, children, element }: RenderElementProps) {
         }}
         className={'w-full h-full bg-cover bg-center'}
       />
-      {children}
+
       {loading ? (
         <div className={'absolute bg-background flex items-center inset-0 justify-center w-full h-full'}>
           <LoadingDots />

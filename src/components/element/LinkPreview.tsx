@@ -35,7 +35,7 @@ function LinkPreview({ attributes, children, element }: RenderElementProps) {
   }, [url]);
 
   return (
-    <div {...attributes} onClick={() => {
+    <div data-block-type={element.type} {...attributes} onClick={() => {
       if (!url) return;
       window.open(url, '_blank');
     }} className={`flex bg-accent rounded-[8px] !p-2 gap-2 relative w-full cursor-pointer`}>

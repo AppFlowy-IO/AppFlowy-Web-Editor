@@ -17,7 +17,7 @@ import ColorTheme from '@/assets/color_theme.svg?react';
 import FontColorIcon from '@/assets/icon_fontcolor.svg?react';
 import Line from '@/assets/line-1.svg?react';
 
-import { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from '@/i18n';
 
 import { ColorEnum, renderColor } from '@/lib/color';
@@ -105,6 +105,7 @@ function Color() {
     Editor.addMark(editor, format, color);
     setOpen(false);
   }, [editor]);
+  const ref = React.useRef<HTMLButtonElement>(null);
 
   const popoverContent = useMemo(() => {
     return <div className={'p-3 flex flex-col gap-3 w-[200px]'}>
@@ -168,7 +169,7 @@ function Color() {
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button style={{
+        <Button ref={ref} style={{
           color: activeFontColor ? renderColor(activeFontColor) : undefined,
           backgroundColor: activeBgColor ? renderColor(activeBgColor) : undefined,
         }} variant={'ghost'} size={'icon'} onMouseDown={e => {
@@ -182,6 +183,7 @@ function Color() {
 
       <PopoverContent
         align={'center'}
+        container={ref.current?.parentElement}
         sideOffset={4}
         onOpenAutoFocus={e => e.preventDefault()}
         onCloseAutoFocus={e => e.preventDefault()}>

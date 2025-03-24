@@ -16,7 +16,7 @@ function Table({ attributes, children, element }: RenderElementProps) {
 
   const columns = useMemo(() => {
     return Array.from({ length: columnCount }, () => {
-      const width = 160;
+      const width = 250;
 
       return { width };
     });
@@ -35,7 +35,7 @@ function Table({ attributes, children, element }: RenderElementProps) {
   }, [columns]);
 
   return (
-    <div {...attributes} className={`relative w-full`}>
+    <div {...attributes} data-block-type={element.type} className={`relative w-full overflow-auto appflowy-scrollbar`}>
       <table className={'row-header-hl w-full'}>
         {colGroup}
         <tbody className={'w-full'}>

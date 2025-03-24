@@ -1,13 +1,14 @@
+import { NodeType } from '@/types';
 import { FC, useCallback } from 'react';
 import { Editable, Slate, ReactEditor } from 'slate-react';
 import {
-  Descendant, NodeEntry, Operation,
+  Descendant, NodeEntry, Operation,Element as SlateElement
 } from 'slate';
 import Element from '../components/element/Element';
 import Leaf from '@/components/Leaf';
 import { useKeydown } from '@/editor/useKeydown';
-import { useTranslation } from '@/i18n';
 import { useDecorate } from '@/components/element/CodeBlock/useDecorate';
+import { useTranslation } from '@/i18n';
 
 const defaultInitialValue = [
   {
@@ -31,22 +32,22 @@ const RichText = ({
   ToolbarComponent,
   initialValue = defaultInitialValue,
 }: RichTextProps) => {
-  const { t } = useTranslation();
 
   const handleOnChange = useCallback((value: Descendant[]) => {
     onChange?.(editor.operations, value);
   }, [editor, onChange]);
 
   const handleKeyDown = useKeydown(editor);
+  const { t } = useTranslation();
 
   const codeDecorate = useDecorate(editor);
   return (
     <Slate editor={editor} onChange={handleOnChange} initialValue={initialValue}>
       {ToolbarComponent && <ToolbarComponent/>}
       <Editable
+        placeholder={editor.children.length > 0 && (editor.children[0] as SlateElement).type !== NodeType.Paragraph ? undefined : t('placeholder')}
         readOnly={readOnly}
         className={'outline-none flex-1 h-auto px-5'}
-        placeholder={t('placeholder')}
         renderElement={Element}
         renderLeaf={Leaf}
         onKeyDown={handleKeyDown}
