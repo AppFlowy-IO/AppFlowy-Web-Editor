@@ -93,10 +93,14 @@ function Aa() {
   }, [data?.level, t, type]);
 
   const selectedOption = options.find(option => option.checked);
+
+  const ref = React.useRef<HTMLButtonElement>(null);
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
+          ref={ref}
           variant={'ghost'}
           size={'icon'}
           onMouseDown={e => {
@@ -109,6 +113,7 @@ function Aa() {
         </Button>
       </PopoverTrigger>
       <PopoverContent
+        container={ref.current?.parentElement}
         align={'start'}
         sideOffset={4}
         className={'w-[240px]'}

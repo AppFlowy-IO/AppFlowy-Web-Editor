@@ -8,7 +8,7 @@ function Heading({ attributes, children, element }: RenderElementProps) {
   }, [element.data]);
 
   return (
-    <div {...attributes} data-block-type={'heading'} data-level={data.level}>{children}</div>
+    <div {...attributes} data-block-type={element.type} data-level={data.level}>{children}</div>
   );
 }
 
