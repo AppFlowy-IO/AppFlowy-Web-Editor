@@ -1,14 +1,26 @@
-import { Text, Element, Descendant } from 'slate';
-import { Op } from 'quill-delta';
-import { EditorNode, NodeType } from '@/types';
+import { Text, Element, Descendant } from "slate";
+import { Op } from "quill-delta";
+import { EditorNode, NodeType } from "@/types";
 
 export function transformToSlateData(nodes: EditorNode[]): Element[] {
-  return nodes.map(node => {
+  return nodes.map((node) => {
     if (!node.children || node.children.length === 0) {
       return {
         type: node.type as NodeType,
         data: node.data,
         children: deltaToSlateText(node.delta || []),
+      };
+    }
+
+    if (
+      node.type === NodeType.Table ||
+      node.type === NodeType.TableRow ||
+      node.type === NodeType.TableCell
+    ) {
+      return {
+        type: node.type as NodeType,
+        data: node.data,
+        children: transformToSlateData(node.children),
       };
     }
 
@@ -25,9 +37,8 @@ export function transformToSlateData(nodes: EditorNode[]): Element[] {
   });
 }
 
-
 export function transformFromSlateData(nodes: Descendant[]): EditorNode[] {
-  return nodes.map(node => {
+  return nodes.map((node) => {
     if (!Element.isElement(node)) {
       return {
         type: NodeType.Paragraph,
@@ -36,13 +47,13 @@ export function transformFromSlateData(nodes: Descendant[]): EditorNode[] {
       };
     }
 
-    if (node.children.length > 0 && 'type' in node.children[0]) {
+    if (node.children.length > 0 && "type" in node.children[0]) {
       if (node.type === NodeType.NestedBlock) {
         const [mainParagraph, ...nestedParagraphs] = node.children as Element[];
         return {
           type: mainParagraph.type as NodeType,
           data: node.data,
-          delta: slateTextToDelta(mainParagraph.children || []),
+          delta: slateTextToDelta(mainParagraph.children as Text[]),
           children: transformFromSlateData(nestedParagraphs),
         };
       } else {
@@ -52,21 +63,19 @@ export function transformFromSlateData(nodes: Descendant[]): EditorNode[] {
           children: transformFromSlateData(node.children),
         };
       }
-
     }
 
     return {
       type: node.type as NodeType,
       data: node.data,
-      delta: slateTextToDelta(node.children || []),
+      delta: slateTextToDelta(node.children as Text[]),
       children: [],
     };
-
   });
 }
 
 export function deltaToSlateText(delta: Op[]): Text[] {
-  return delta.map(op => {
+  return delta.map((op) => {
     const { insert, attributes } = op;
     return {
       text: insert as string,

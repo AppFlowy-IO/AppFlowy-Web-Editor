@@ -1,4 +1,4 @@
-import Markdown from '@/dev/Markdown';
+import {MarkdownDemo} from '@/dev/MarkdownDemo';
 import { Editor, EditorData, NodeType, EditorProvider, FixedToolbar } from '../index';
 import { useCallback, useState } from 'react';
 import { Switch } from '@/components/ui/switch';
@@ -136,7 +136,7 @@ export default function App() {
           />
         </EditorProvider>
       </div>
-      <Markdown />
+      <MarkdownDemo />
     </div>
   );
 }

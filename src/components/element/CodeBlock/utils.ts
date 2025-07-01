@@ -1,12 +1,26 @@
-import { BaseRange, NodeEntry, Text, Path } from 'slate';
-import Prism, { Grammar } from 'prismjs';
+import { BaseRange, NodeEntry, Text, Path } from "slate";
+import Prism, { Grammar } from "prismjs";
+import "prismjs/components/prism-typescript";
+import "prismjs/components/prism-javascript";
+import "prismjs/components/prism-python";
+import "prismjs/components/prism-java";
+import "prismjs/components/prism-c";
+import "prismjs/components/prism-cpp";
+import "prismjs/components/prism-csharp";
+import "prismjs/components/prism-go";
+import "prismjs/components/prism-rust";
+import "prismjs/components/prism-php";
+import "prismjs/components/prism-ruby";
+import "prismjs/components/prism-swift";
+import "prismjs/components/prism-kotlin";
+import "prismjs/components/prism-scala";
 
 const push_string = (
   token: string | Prism.Token,
   path: Path,
   start: number,
   ranges: BaseRange[],
-  token_type = 'text'
+  token_type = "text"
 ) => {
   let newStart = start;
 
@@ -30,17 +44,18 @@ const recurseTokenize = (
   parent_tag?: string
 ) => {
   // Uses the parent's token type if a Token only has a string as its content
-  if (typeof token === 'string') {
+  if (typeof token === "string") {
     return push_string(token, path, start, ranges, parent_tag);
   }
 
-  if ('content' in token) {
+  if ("content" in token) {
     if (token.content instanceof Array) {
       // Calls recurseTokenize on nested Tokens in content
       let newStart = start;
 
       for (const subToken of token.content) {
-        newStart = recurseTokenize(subToken, path, ranges, newStart, token.type) || 0;
+        newStart =
+          recurseTokenize(subToken, path, ranges, newStart, token.type) || 0;
       }
 
       return newStart;
@@ -51,9 +66,9 @@ const recurseTokenize = (
 };
 
 function switchCodeTheme(isDark: boolean) {
-  const link = document.getElementById('prism-css');
+  const link = document.getElementById("prism-css");
 
-  if (link && link.classList.contains('dark') === isDark) {
+  if (link && link.classList.contains("dark") === isDark) {
     return;
   }
 
@@ -61,19 +76,20 @@ function switchCodeTheme(isDark: boolean) {
     document.head.removeChild(link);
   }
 
-  const newLink = document.createElement('link');
+  const newLink = document.createElement("link");
 
-  newLink.rel = 'stylesheet';
+  newLink.rel = "stylesheet";
   newLink.href = isDark
-    ? 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-dark.min.css'
-    : 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css';
-  newLink.id = 'prism-css';
-  newLink.classList.add(isDark ? 'dark' : 'light');
+    ? "https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-dark.min.css"
+    : "https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css";
+  newLink.id = "prism-css";
+  newLink.classList.add(isDark ? "dark" : "light");
   document.head.appendChild(newLink);
 }
 
 export const decorateCode = ([node, path]: NodeEntry, language: string) => {
-  const isDark = document.documentElement.getAttribute('data-dark-mode') === 'true';
+  const isDark =
+    document.documentElement.getAttribute("data-dark-mode") === "true";
 
   switchCodeTheme(isDark);
 

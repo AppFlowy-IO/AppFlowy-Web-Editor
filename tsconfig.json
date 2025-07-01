@@ -11,7 +11,6 @@
     "strictNullChecks": true,
     "skipLibCheck": true,
     "moduleResolution": "node",
-    "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
@@ -22,7 +21,6 @@
     "noFallthroughCasesInSwitch": true,
     "declaration": true,
     "declarationDir": "dist",
-    "emitDeclarationOnly": true,
     "baseUrl": ".",
     "paths": {
       "@/*": [
@@ -30,9 +28,10 @@
       ]
     },
     "types": [
-      "react-i18next"
+      "jest"
     ],
     "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "typeRoots": [
       "src/@types",
       "node_modules/@types"
@@ -40,10 +39,7 @@
   },
   "include": [
     "src",
-    "src/types",
-    "tailwind.config.ts",
-    "postcss.config.ts",
-    "vite.config.ts"
+    "src/types"
   ],
   "exclude": [
     "src/locales/**/*.json"

@@ -1,12 +1,12 @@
-import { BaseEditor } from 'slate';
-import { ReactEditor } from 'slate-react';
+import { BaseEditor } from "slate";
+import { ReactEditor } from "slate-react";
 
 type ElementData = Record<string, unknown>;
 
 interface BaseElement {
   type: string;
   data?: ElementData;
-  children: (CustomElement | CustomText)[];
+  children: (BaseElement | CustomText)[];
 }
 
 interface CustomText {
@@ -25,7 +25,7 @@ interface CustomText {
   class_name?: string;
 }
 
-declare module 'slate' {
+declare module "slate" {
   interface CustomTypes {
     Editor: BaseEditor & ReactEditor;
     Element: BaseElement;

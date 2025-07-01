@@ -1,16 +1,20 @@
-import { RenderLeafProps } from 'slate-react';
-import { renderColor } from '@/lib/color';
+import { RenderLeafProps } from "slate-react";
+import { renderColor } from "@/lib/color";
 
 function Leaf({ attributes, children, leaf }: RenderLeafProps) {
   const style: React.CSSProperties = {};
-  const classList = [leaf.prism_token, leaf.prism_token && 'token', leaf.class_name].filter(Boolean);
+  const classList = [
+    leaf.prism_token,
+    leaf.prism_token && "token",
+    leaf.class_name,
+  ].filter(Boolean);
 
   if (leaf.bold) {
     children = <strong>{children}</strong>;
   }
 
   if (leaf.code) {
-    children = <code>{children}</code>;
+    children = <code className="bg-muted">{children}</code>;
   }
 
   if (leaf.strikethrough) {
@@ -29,13 +33,25 @@ function Leaf({ attributes, children, leaf }: RenderLeafProps) {
     style.backgroundColor = renderColor(leaf.bg_color);
   }
   if (leaf.font_color) {
-    classList.push('text-color');
+    classList.push("text-color");
     style.color = renderColor(leaf.font_color);
   }
 
-  const className = classList.join(' ');
+  if (leaf.href) {
+    children = (
+      <a className="underline text-primary" href={leaf.href} target="_blank">
+        {children}
+      </a>
+    );
+  }
 
-  return <span {...attributes} className={className} style={style}>{children}</span>;
+  const className = classList.join(" ");
+
+  return (
+    <span {...attributes} className={className} style={style}>
+      {children}
+    </span>
+  );
 }
 
 export default Leaf;

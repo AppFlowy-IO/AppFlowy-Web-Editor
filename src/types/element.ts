@@ -1,4 +1,4 @@
-import { ElementData } from '@/@types/editor';
+import { ElementData } from "../@types/editor";
 
 export interface HeadingData extends ElementData {
   level: number;
