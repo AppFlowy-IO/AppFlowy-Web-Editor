@@ -58,17 +58,7 @@ export const EditorProvider: React.FC<{
   const applyMarkdown = useCallback(
     (markdown: string) => {
       const newContent = parseMarkdown(markdown);
-      // Remove empty first and last lines
-      if (newContent.length > 1) {
-        const firstLine = newContent[0] as Element;
-        if (firstLine.type === "paragraph" && firstLine.children.length === 0) {
-          newContent.shift();
-        }
-        const lastLine = newContent[0] as Element;
-        if (lastLine.type === "paragraph" && lastLine.children.length === 0) {
-          newContent.pop();
-        }
-      }
+
       replaceContent(transformToSlateData(newContent));
     },
     [replaceContent]
