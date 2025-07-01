@@ -424,6 +424,40 @@ Paragraph 3`;
       expect(result[4].type).toBe(NodeType.Paragraph);
     });
 
+    test("Images", () => {
+      const markdown = `![Image alt text](https://example.com/image.jpg)
+![](https://example.com/no-alt.png)
+![Complex alt text with spaces](https://example.com/path/to/image.gif)`;
+
+      const result = parseMarkdown(markdown);
+
+      expect(result).toHaveLength(3);
+
+      // First image with alt text
+      expect(result[0]).toEqual({
+        type: NodeType.Image,
+        data: { url: "https://example.com/image.jpg" },
+        children: [],
+        delta: [{ insert: "Image alt text" }],
+      });
+
+      // Second image without alt text
+      expect(result[1]).toEqual({
+        type: NodeType.Image,
+        data: { url: "https://example.com/no-alt.png" },
+        children: [],
+        delta: [{ insert: "" }],
+      });
+
+      // Third image with complex alt text
+      expect(result[2]).toEqual({
+        type: NodeType.Image,
+        data: { url: "https://example.com/path/to/image.gif" },
+        children: [],
+        delta: [{ insert: "Complex alt text with spaces" }],
+      });
+    });
+
     test("Tables", () => {
       const markdown = `| Col1 | Col2 | Col3 |
 |-----|-----|-----|
@@ -594,6 +628,8 @@ Paragraph 3`;
 
 This is a paragraph
 
+![Sample Image](https://example.com/image.jpg)
+
 - List item 1
 - List item 2
 
@@ -608,10 +644,13 @@ Final paragraph`;
       const result = parseMarkdown(markdown);
 
       // Verify various elements are correctly parsed
-      expect(result.length).toBeGreaterThan(5);
+      expect(result.length).toBeGreaterThan(6);
       expect(result[0].type).toBe(NodeType.Heading);
       expect(
         result.some((node: EditorNode) => node.type === NodeType.Paragraph)
+      ).toBe(true);
+      expect(
+        result.some((node: EditorNode) => node.type === NodeType.Image)
       ).toBe(true);
       expect(
         result.some((node: EditorNode) => node.type === NodeType.BulletedList)

@@ -237,6 +237,18 @@ function parseLine(line: string): LineParseResult {
     };
   }
 
+  // Images ![alt](url)
+  const imageMatch = trimmed.match(/^!\[([^\]]*)\]\(([^)]+)\)$/);
+  if (imageMatch) {
+    return {
+      type: NodeType.Image,
+      content: imageMatch[1], // alt text
+      data: { url: imageMatch[2] },
+      indent,
+      raw: line,
+    };
+  }
+
   // Table row (simple detection)
   if (trimmed.includes("|") && trimmed.split("|").length >= 3) {
     return {
